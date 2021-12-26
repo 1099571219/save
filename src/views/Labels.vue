@@ -1,3 +1,17 @@
 <template>
-  <div>Labels.vue</div>
+  <div>
+    Labels.vue
+    <Nav />
+  </div>
 </template>
+
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
+  name: "labels",
+});
+</script>
+
+<style scoped>
+</style>
