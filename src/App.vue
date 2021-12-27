@@ -5,6 +5,13 @@
 </template>
 
 <style lang="scss">
+body {
+  line-height: 1.5;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
 * {
   margin: 0;
   padding: 0;
