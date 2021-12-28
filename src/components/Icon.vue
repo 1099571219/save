@@ -16,6 +16,7 @@ import Vue from "vue";
 
 export default Vue.extend({
   props: ["name"],
+  name: "Icon",
 });
 </script>
 
@@ -26,5 +27,6 @@ export default Vue.extend({
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+  font-size: 16px;
 }
 </style>
