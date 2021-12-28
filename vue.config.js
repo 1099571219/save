@@ -13,6 +13,7 @@ module.exports = {
     // .tap(options => ({ ...options, plugins: [{ removeAttrs: { attrs: 'fill' } }] })).end()
     //在加上后面的两行代码
     // removeAttr 删除属性
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     config.plugin('svg-sprite').use(require('svg-sprite-loader/plugin'), [{ plainSprite: true }])
     config.module.rule('svg').exclude.add(dir)
   }

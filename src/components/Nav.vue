@@ -23,6 +23,7 @@ export default Vue.extend({
 </script>
 
 <style lang='scss' scoped>
+@import "~@/assets/style/helper.scss";
 nav {
   display: flex;
   box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.3);
@@ -40,7 +41,7 @@ nav {
     }
   }
   > .item.selected {
-    color: red;
+    color: $color-highlight;
   }
 }
 </style>
