@@ -77,7 +77,7 @@ export default class numberPad extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 .numberPad {
-  background-color: #dcf1d6;
+  background-color: #fff;
   .output {
     @extend %innerShadow;
     text-align: right;
@@ -95,7 +95,7 @@ export default class numberPad extends Vue {
       height: 7.9vh;
       width: 20%;
       border: none;
-      $bg: #dcf1d6;
+      $bg: darken(#dcf1d6, 20%);
       &.ok {
         height: 7.9vh * 2;
         float: right;

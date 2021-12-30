@@ -1,9 +1,9 @@
 <template>
   <Layout classPreFix="layout">
     <number-pad />
-    <types :xxx="1234" />
+    <types />
     <notes />
-    <tags />
+    <tags :data-source="tags" />
   </Layout>
 </template>
 
@@ -17,14 +17,20 @@ import Vue from "vue";
 export default Vue.extend({
   components: { NumberPad, Types, Notes, Tags },
   name: "Money",
+  data() {
+    return {
+      tags: ["衣", "食", "住", "行", "彩票"],
+    };
+  },
 });
 </script>
 
 <style lang="scss">
 .layout-content {
+  $bg: #dcf1d6;
   display: flex;
   flex-direction: column-reverse;
-  background-color: #dcf1d6;
+  background-color: lighten($color: $bg, $amount: 50%);
   overflow: auto;
 }
 </style>

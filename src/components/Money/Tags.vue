@@ -4,56 +4,35 @@
       <button>新增标签</button>
     </div>
     <ul class="current">
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
+      <li
+        v-for="tag in dataSource"
+        :key="tag"
+        :class="selectedTags.indexOf(tag) >= 0 && 'selected'"
+        @click="toggle(tag)"
+      >
+        {{ tag }}
+      </li>
     </ul>
   </div>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import Vue from "vue";
+import { Component, Prop } from "vue-property-decorator";
+
+@Component
+export default class tags extends Vue {
+  @Prop() dataSource: string[] | undefined;
+  selectedTags: string[] = [];
+  toggle(tag: string) {
+    const index = this.selectedTags.indexOf(tag);
+    if (this.selectedTags.indexOf(tag) >= 0) {
+      this.selectedTags.splice(index, 1);
+    } else {
+      this.selectedTags.push(tag);
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -61,13 +40,16 @@ export default {};
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
-  background-color: #dcf1d6;
+  $bg: #dcf1d6;
+  background-color: lighten($color: $bg, $amount: 100%);
+
   > .current {
     display: flex;
     flex-wrap: wrap-reverse;
     flex-direction: row;
     > li {
-      background-color: #a2d79f;
+      $bg: #a2d79f;
+      background-color: $bg;
       color: #666;
       $h: 24px;
       line-height: $h;
@@ -75,6 +57,10 @@ export default {};
       border-radius: $h/2;
       padding: 0 16px;
       margin: 12px;
+      &.selected {
+        background-color: darken($color: $bg, $amount: 30%);
+        color: #eee;
+      }
     }
   }
   > .new {
@@ -89,8 +75,6 @@ export default {};
       border-bottom: 1px solid #666;
       padding: 0 5px;
     }
-  }
-  &.selected {
   }
 }
 </style>
