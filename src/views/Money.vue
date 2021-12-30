@@ -2,9 +2,7 @@
   <Layout classPreFix="layout">
     <number-pad />
     <types :xxx="1234" />
-    <div>
-      <notes />
-    </div>
+    <notes />
     <tags />
   </Layout>
 </template>
