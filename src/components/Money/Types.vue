@@ -5,27 +5,22 @@
   </ul>
 </template>
 
-<script>
-export default {
-  name: "Types",
-  data() {
-    return {
-      type: "-", //'-'表示指出，'+'表示收入
-    };
-  },
-  props: ["xxx"],
-  mounted() {
-    console.log(this.xxx);
-  },
-  methods: {
-    selectType(type) {
-      if (type !== "-" && type !== "+") {
-        throw new Error("type is unknow");
-      }
-      this.type = type;
-    },
-  },
-};
+<script lang='ts'>
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+
+@Component
+export default class Types extends Vue {
+  type = "-"; //'-' 表示指出，'+'表示收入
+
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  selectType(type: string) {
+    if (type !== "-" && type !== "+") {
+      throw new Error("type is unknow");
+    }
+    this.type = type;
+  }
+}
 </script>
 
 <style lang="scss" scoped>
