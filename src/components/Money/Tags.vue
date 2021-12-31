@@ -41,7 +41,7 @@ export default class tags extends Vue {
     const input = this.newTagName.trim();
     if (input) {
       if (this.dataSource) {
-        this.$emit("update:dataSource", [...this.dataSource, input]);
+        this.$emit("update:tags", [...this.dataSource, input]);
       }
       this.warn = "在这里输入标签名";
     } else {

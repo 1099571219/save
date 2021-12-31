@@ -5,7 +5,8 @@
     <!-- 只要是传一个东西进去，然后要更新它就使用.sync 在内部使用$emit('update:value',更新后的参数) -->
     <types :value.sync="record.type" />
     <notes @update:value="onUpdateNotes" />
-    <tags :dataSource="tags" @update:dataSource='onUpdateTags' />
+    <tags :dataSource="tags" @update:dataSource='onUpdateTags'
+    @update:tags="onUpdateTagsChanged" />
   </Layout>
 </template>
 
@@ -38,6 +39,9 @@ export default class Money extends Vue {
 
   onUpdateTags(value: string[]) {
     this.record.tags = value;
+  }
+  onUpdateTagsChanged(value:string[]){
+    this.tags = value;
   }
   onUpdateNotes(value: string) {
     this.record.notes = value;
