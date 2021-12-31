@@ -1,7 +1,7 @@
 <template>
   <Layout classPreFix="layout">
-    {{ record }}
-    <number-pad :value.sync="record.amount" @submit="saveRecord"/>
+    {{ recordList }}
+    <number-pad :value.sync="record.amount" @submit="saveRecord" />
     <!-- 只要是传一个东西进去，然后要更新它就使用.sync 在内部使用$emit('update:value',更新后的参数) -->
     <types :value.sync="record.type" />
     <notes @update:value="onUpdateNotes" />
@@ -21,11 +21,14 @@ import Types from "@/components/Money/Types.vue";
 import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
 
+// 数据库升级 数据迁移
+
 type Record = {
   tags: string[];
   notes: string;
   type: string;
   amount: number;
+  createdAt?: Date; //类 小于类型 / 构造函数
 };
 
 @Component({
@@ -33,7 +36,9 @@ type Record = {
 })
 export default class Money extends Vue {
   tags = ["衣", "食", "住", "行"];
-  recordList:Record[] = [];
+  recordList: Record[] = JSON.parse(
+    window.localStorage.getItem("recordList") || "[]"
+  );
   record: Record = {
     tags: [],
     notes: "",
@@ -50,15 +55,16 @@ export default class Money extends Vue {
   onUpdateNotes(value: string) {
     this.record.notes = value;
   }
-  saveRecord(){
+  saveRecord() {
     // 深拷贝，避免内存地址一致的bug
-    const record2 = JSON.parse(JSON.stringify(this.record))
-    this.recordList.push(record2)
-    console.log(this.recordList)
+    const record2: Record = JSON.parse(JSON.stringify(this.record));
+    record2.createdAt = new Date();
+    this.recordList.push(record2);
+    console.log(this.recordList);
   }
-  @Watch('recordList')
-  onRecordListChanged(){
-    localStorage.setItem('reordList',JSON.stringify(this.recordList))
+  @Watch("recordList")
+  onRecordListChanged() {
+    localStorage.setItem("recordList", JSON.stringify(this.recordList));
   }
 }
 </script>
