@@ -1,9 +1,11 @@
 <template>
   <Layout classPreFix="layout">
-    <number-pad />
-    <types />
-    <notes />
-    <tags :data-source="tags" />
+    {{ record }}
+    <number-pad :value.sync="record.amount" />
+    <!-- 只要是传一个东西进去，然后要更新它就使用.sync 在内部使用$emit('update:value',更新后的参数) -->
+    <types :value.sync="record.type" />
+    <notes @update:value="onUpdateNotes" />
+    <tags :dataSource="tags" @update:dataSource='onUpdateTags' />
   </Layout>
 </template>
 
@@ -13,16 +15,34 @@ import NumberPad from "@/components/Money/NumberPad.vue";
 import Tags from "@/components/Money/Tags.vue";
 import Types from "@/components/Money/Types.vue";
 import Vue from "vue";
+import { Component } from "vue-property-decorator";
 
-export default Vue.extend({
+type Record = {
+  tags: string[];
+  notes: string;
+  type: string;
+  amount: number;
+};
+
+@Component({
   components: { NumberPad, Types, Notes, Tags },
-  name: "Money",
-  data() {
-    return {
-      tags: ["衣", "食", "住", "行", "彩票"],
-    };
-  },
-});
+})
+export default class Money extends Vue {
+  tags = ["衣", "食", "住", "行", "彩票"];
+  record: Record = {
+    tags: [],
+    notes: "",
+    type: "-",
+    amount: 10,
+  };
+
+  onUpdateTags(value: string[]) {
+    this.record.tags = value;
+  }
+  onUpdateNotes(value: string) {
+    this.record.notes = value;
+  }
+}
 </script>
 
 <style lang="scss">

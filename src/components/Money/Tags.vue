@@ -1,7 +1,8 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button>新增标签</button>
+      <button @click="create">新增标签</button>
+      <input type="text" v-model="newTagName" :placeholder="warn" />
     </div>
     <ul class="current">
       <li
@@ -22,15 +23,31 @@ import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class tags extends Vue {
-  @Prop() dataSource: string[] | undefined;
+  @Prop(Array) readonly dataSource: string[] | undefined;
   selectedTags: string[] = [];
+  newTagName = "";
+  warn = "在这里输入标签名";
   toggle(tag: string) {
     const index = this.selectedTags.indexOf(tag);
     if (this.selectedTags.indexOf(tag) >= 0) {
       this.selectedTags.splice(index, 1);
+      this.$emit("update:dataSource", this.selectedTags);
     } else {
       this.selectedTags.push(tag);
+      this.$emit("update:dataSource", this.selectedTags);
     }
+  }
+  create() {
+    const input = this.newTagName.trim();
+    if (input) {
+      if (this.dataSource) {
+        this.$emit("update:dataSource", [...this.dataSource, input]);
+      }
+      this.warn = "在这里输入标签名";
+    } else {
+      this.warn = "请输入正确的标签名";
+    }
+    this.newTagName = "";
   }
 }
 </script>
@@ -67,6 +84,11 @@ export default class tags extends Vue {
     margin-left: 16px;
     padding-top: 16px;
     padding-bottom: 13.38px;
+    > input {
+      margin-left: 1em;
+      border: none;
+      background: transparent;
+    }
     button {
       font-size: 16px;
       color: #666;
