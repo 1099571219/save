@@ -5,22 +5,17 @@
       <button @click="inputContent">1</button>
       <button @click="inputContent">2</button>
       <button @click="inputContent">3</button>
-      <button @click="inputContent">+</button>
       <button @click="remove">删除</button>
       <button @click="inputContent">4</button>
       <button @click="inputContent">5</button>
       <button @click="inputContent">6</button>
-      <button @click="inputContent">-</button>
       <button @click="clear">清空</button>
       <button @click="inputContent">7</button>
       <button @click="inputContent">8</button>
       <button @click="inputContent">9</button>
-      <button @click="inputContent">*</button>
       <button class="ok" @click="ok">ok</button>
       <button @click="inputContent">0</button>
       <button @click="inputContent">.</button>
-      <button @click="inputContent">%</button>
-      <button @click="inputContent">/</button>
     </div>
   </div>
 </template>
@@ -72,6 +67,10 @@ export default class numberPad extends Vue {
     this.output = "0";
   }
   ok() {
+    const number = this.output;
+    if (number === "0") {
+      return;
+    }
     this.$emit("update:value", this.output);
     this.$emit("submit", this.output);
     this.output = "0";
@@ -98,7 +97,7 @@ export default class numberPad extends Vue {
     > button {
       float: left;
       height: 7.9vh;
-      width: 20%;
+      width: 25%;
       border: none;
       $bg: darken(#dcf1d6, 20%);
       &.ok {
@@ -109,28 +108,26 @@ export default class numberPad extends Vue {
       &:nth-child(1),
       &:nth-child(2),
       &:nth-child(3),
-      &:nth-child(4),
-      &:nth-child(5) {
+      &:nth-child(4) {
         background: darken($bg, 0.5% * 1);
       }
+      &:nth-child(5),
       &:nth-child(6),
       &:nth-child(7),
-      &:nth-child(8),
-      &:nth-child(9),
-      &:nth-child(10) {
+      &:nth-child(8) {
         background: darken($bg, 0.5% * 3);
       }
-      &:nth-child(11),
-      &:nth-child(12),
-      &:nth-child(13),
-      &:nth-child(14) {
+      &:nth-child(9),
+      &:nth-child(10),
+      &:nth-child(11) {
         background: darken($bg, 0.5% * 6);
       }
-      &:nth-child(16),
-      &:nth-child(17),
-      &:nth-child(18),
-      &:nth-child(19) {
+      &:nth-child(13),
+      &:nth-child(14) {
         background: darken($bg, 0.5% * 9);
+      }
+      &:nth-child(13) {
+        width: 50%;
       }
     }
   }

@@ -27,7 +27,7 @@ export default class notes extends Vue {
 .notes {
   display: flex;
   padding: 25px 0;
-  background-color: #dcf1d6;
+  background-color: #fff;
   align-items: center;
 
   > .name {

@@ -4,7 +4,7 @@ type Tag = {
     name: string;
 }
 type TagListModel = {
-    data:Tag[]
+    data: Tag[]
     fetch: () => Tag[]
     create: (name: string) => 'success' | 'duplicated' //联合类型  //success成功 duplicated重复
     save: () => void
@@ -21,11 +21,11 @@ const tagListModel: TagListModel = {
         window.localStorage.setItem(localStorageKeyName, JSON.stringify(this.data));
     },
     create(name: string) {
-        const names = this.data.map(item=>item.name)
+        const names = this.data.map(item => item.name)
         if (names.indexOf(name) >= 0) {
             return 'duplicated';
         }
-        this.data.push({id:name,name:name})
+        this.data.push({ id: name, name: name })
         this.save()
         return 'success';
     }

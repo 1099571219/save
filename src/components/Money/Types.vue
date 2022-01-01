@@ -12,13 +12,13 @@ import { Component, Prop, Watch } from "vue-property-decorator";
 @Component
 export default class Types extends Vue {
   //'-' 表示指出，'+'表示收入
-  @Prop() readonly value!:string;
+  @Prop() readonly value!: string;
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   selectType(type: string) {
     if (type !== "-" && type !== "+") {
       throw new Error("type is unknow");
     }
-    this.$emit('update:value',type)
+    this.$emit("update:value", type);
   }
   // 只有在变化时才会触发
 }
