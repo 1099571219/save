@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div class="navBar">
-      <Icon  class="leftIcon" name="left" @click="goBack"/>
+      <Icon class="leftIcon" name="left" @click="goBack" />
       <span class="title">编辑标签 </span>
       <span class="rightIcon"></span>
     </div>
@@ -49,7 +49,9 @@ export default class EditLabel extends Vue {
   }
   remove() {
     if (this.tag) {
-      tagListModel.remove(this.tag.id);
+      if (tagListModel.remove(this.tag.id)) {
+        this.$router.back();
+      }
     }
   }
   goBack() {
@@ -70,8 +72,8 @@ export default class EditLabel extends Vue {
   > .title {
   }
   > .leftIcon {
-    width: 50px;
-    height: 50px;
+    width: 24px;
+    height: 24px;
   }
   > .rightIcon {
     width: 24px;
