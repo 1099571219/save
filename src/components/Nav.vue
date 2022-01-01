@@ -26,6 +26,7 @@ export default Vue.extend({
 @import "~@/assets/style/helper.scss";
 nav {
   display: flex;
+  background: #fff;
   @extend %outerShadow;
   > .item {
     padding: 2px 0;

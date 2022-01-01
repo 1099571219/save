@@ -74,7 +74,7 @@ export default class numberPad extends Vue {
   ok() {
     this.$emit("update:value", this.output);
     this.$emit("submit", this.output);
-    this.output = '0';
+    this.output = "0";
   }
 }
 </script>
@@ -104,6 +104,7 @@ export default class numberPad extends Vue {
       &.ok {
         height: 7.9vh * 2;
         float: right;
+        background: #ffd571;
       }
       &:nth-child(1),
       &:nth-child(2),
@@ -128,8 +129,7 @@ export default class numberPad extends Vue {
       &:nth-child(16),
       &:nth-child(17),
       &:nth-child(18),
-      &:nth-child(19),
-      &:nth-child(15) {
+      &:nth-child(19) {
         background: darken($bg, 0.5% * 9);
       }
     }

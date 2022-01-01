@@ -14,6 +14,7 @@ body {
   font-family: $font-hei;
   line-height: 1.5;
   font-size: 16px;
+  background: #dcf1d6;
 }
 #app {
   // display: flex;
