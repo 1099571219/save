@@ -4,7 +4,11 @@
     <number-pad :value.sync="record.amount" @submit="saveRecord" />
     <!-- 只要是传一个东西进去，然后要更新它就使用.sync 在内部使用$emit('update:value',更新后的参数) -->
     <types :value.sync="record.type" />
-    <notes @update:value="onUpdateNotes" />
+    <notes
+      fieldName="备注"
+      placeholder="在这里输入备注"
+      @update:value="onUpdateNotes"
+    />
     <tags
       :dataSource="tags"
       @update:dataSource="onUpdateTags"
@@ -24,9 +28,9 @@ import recordListModel from "@/components/models/recordListModel";
 import tagListModel from "@/components/models/tagListModel";
 
 type Tag = {
-    id: string;
-    name: string;
-}
+  id: string;
+  name: string;
+};
 type RecordItem = {
   tags: string[];
   notes: string;
@@ -43,7 +47,7 @@ const tagList = tagListModel.fetch();
   components: { NumberPad, Types, Notes, Tags },
 })
 export default class Money extends Vue {
-  tags: Tag[]= tagList;
+  tags: Tag[] = tagList;
   recordList: RecordItem[] = recordList;
   record: RecordItem = {
     tags: [],
