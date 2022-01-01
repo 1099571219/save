@@ -1,3 +1,7 @@
+type Tag = {
+    id: string;
+    name: string;
+}
 type RecordItem = {
     tags: string[];
     notes: string;
