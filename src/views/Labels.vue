@@ -31,7 +31,7 @@ export default class Labels extends Vue {
   createTag() {
     const name = window.prompt('请输出标签名')
     if(name){
-      window.create(name)
+      window.createTag(name)
     }
   }
 }
