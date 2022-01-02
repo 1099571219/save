@@ -25,6 +25,7 @@ import { Component } from "vue-property-decorator";
 import Notes from "@/components/Money/Notes.vue";
 import Button from "@/components/Button.vue";
 import store from "@/store/index2";
+import tagStore from "@/store/tagStore";
 
 @Component({
   components: { Notes, Button },
@@ -44,7 +45,7 @@ export default class EditLabel extends Vue {
   }
   remove() {
     if (this.tag) {
-      if (store.removeTag(this.tag.id)) {
+      if (tagStore.removeTag(this.tag.id)) {
         this.$router.back();
       } else {
         window.alert("删除失败");
