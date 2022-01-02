@@ -5,11 +5,11 @@
     <!-- 只要是传一个东西进去，然后要更新它就使用.sync 在内部使用$emit('update:value',更新后的参数) -->
     <types :value.sync="record.type" />
     <div class="notes">
-    <notes
-      fieldName="备注"
-      placeholder="在这里输入备注"
-      @update:value="onUpdateNotes"
-    />
+      <notes
+        fieldName="备注"
+        placeholder="在这里输入备注"
+        @update:value="onUpdateNotes"
+      />
     </div>
     <tags
       :dataSource="tags"
@@ -62,17 +62,13 @@ export default class Money extends Vue {
     this.record.tags = value;
   }
   onUpdateTagsChanged(value: []) {
-      this.tags = value;
+    this.tags = value;
   }
   onUpdateNotes(value: string) {
     this.record.notes = value;
   }
   saveRecord() {
-    // 深拷贝，避免内存地址一致的bug
-    const record2: RecordItem = recordListModel.clone(this.record);
-    record2.createdAt = new Date();
-    this.recordList.push(record2);
-    console.log(this.recordList);
+    recordListModel.create(this.record);
   }
   @Watch("recordList")
   onRecordListChanged() {
@@ -89,7 +85,7 @@ export default class Money extends Vue {
   background-color: lighten($color: $bg, $amount: 50%);
   overflow: auto;
 }
-.notes{
+.notes {
   padding: 12px 0;
 }
 </style>
