@@ -41,13 +41,12 @@ type RecordItem = {
 };
 
 // 数据库升级 数据迁移
-const recordList = recordListModel.fetch();
 @Component({
   components: { NumberPad, Types, Notes, Tags },
 })
 export default class Money extends Vue {
   tags: Tag[] = window.tagList;
-  recordList: RecordItem[] = recordList;
+  recordList = window.recordList;
   record: RecordItem = {
     tags: [],
     notes: "",
@@ -65,11 +64,7 @@ export default class Money extends Vue {
     this.record.notes = value;
   }
   saveRecord() {
-    recordListModel.create(this.record);
-  }
-  @Watch("recordList")
-  onRecordListChanged() {
-    recordListModel.save();
+    window.createRecord(this.record);
   }
 }
 </script>
