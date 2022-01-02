@@ -38,7 +38,7 @@ export default class tags extends Vue {
     }
   }
   create() {
-    const input = this.newTagName;
+    const input = this.newTagName.trim();
     if (input) {
       if (this.dataSource) {
         this.$emit("update:tags", [...this.dataSource, input]);

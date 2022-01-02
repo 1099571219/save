@@ -14,16 +14,16 @@
 
 <script lang = 'ts'>
 import Vue from "vue";
-import { Component, Prop, Watch } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class notes extends Vue {
   @Prop({ default: "" }) readonly value!: string;
   @Prop({ required: true }) fieldName!: string;
   @Prop() placeholder?: string;
-  @Watch("value")
-  onValueChanged(value: string, oldValue: string) {
+  onValueChanged(value: string) {
     this.$emit("update:value", value);
+    console.log(value)
   }
 }
 </script>
