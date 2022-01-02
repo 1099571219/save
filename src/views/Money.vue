@@ -43,13 +43,11 @@ type RecordItem = {
 
 // 数据库升级 数据迁移
 const recordList = recordListModel.fetch();
-const tagList = tagListModel.fetch();
-console.log(tagList);
 @Component({
   components: { NumberPad, Types, Notes, Tags },
 })
 export default class Money extends Vue {
-  tags: Tag[] = tagList;
+  tags: Tag[] = window.tagList;
   recordList: RecordItem[] = recordList;
   record: RecordItem = {
     tags: [],
