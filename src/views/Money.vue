@@ -20,7 +20,6 @@ import Button from "@/components/Button.vue";
 import Notes from "@/components/Money/Notes.vue";
 import NumberPad from "@/components/Money/NumberPad.vue";
 import Tags from "@/components/Money/Tags.vue";
-import Types from "@/components/Money/Types.vue";
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Tabs from "@/components/Tabs.vue";
@@ -40,7 +39,7 @@ type RecordItem = {
 
 // 数据库升级 数据迁移
 @Component({
-  components: { NumberPad, Types, Notes, Tags, Button, Tabs },
+  components: { NumberPad, Notes, Tags, Button, Tabs },
 })
 export default class Money extends Vue {
   get recordList() {
