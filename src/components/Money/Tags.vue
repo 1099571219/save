@@ -36,10 +36,10 @@ export default class tags extends Vue {
     this.$store.commit("fetchTag");
   }
   toggle(tag: string) {
+    // 有BUG
     const index = this.selectedTags.indexOf(tag);
     if (this.selectedTags.indexOf(tag) >= 0) {
       this.selectedTags.splice(index, 1);
-
       this.$emit("update:dataSource", this.selectedTags);
     } else {
       this.selectedTags.push(tag);
