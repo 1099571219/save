@@ -4,12 +4,22 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex) //把 store 绑到 vue.prototype 上
+
+type RootState = {
+  recordList: RecordItem[],
+  tagList: Tag[],
+  currentTag?: Tag
+}
 const store = new Vuex.Store({
   state: {//data
     recordList: [] as RecordItem[],
-    tagList: [] as Tag[]
-  },
+    tagList: [] as Tag[],
+    currentTag: undefined
+  } as RootState,
   mutations: {//methods 不能直接调
+    setCurrentTag(state,id:string) {
+       state.currentTag=state.tagList.filter((t) => t.id === id)[0];
+    },
     fetchRecords(state) {
       state.recordList = JSON.parse(
         window.localStorage.getItem('recordList') || "[]") as RecordItem[];
@@ -30,17 +40,16 @@ const store = new Vuex.Store({
       const names = state.tagList.map(item => item.name)
       if (names.indexOf(name) >= 0) {
         alert("标签名重复了");
-        return 'duplicated';
       }
       const id = createId().toString();
       state.tagList.push({ id, name: name })
       store.commit('saveTags')
       alert("添加成功");
-      return 'success'
     },
     saveTags(state) {
       window.localStorage.setItem('tagList', JSON.stringify(state.tagList));
     },
+    
   },
 })
 
