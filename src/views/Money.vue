@@ -11,25 +11,21 @@
         @update:value="onUpdateNotes"
       />
     </div>
-    <tags
-      :dataSource="tags"
-      @update:dataSource="onUpdateTags"
-      @update:tags="onUpdateTagsChanged"
-    />
+    <tags />
   </Layout>
 </template>
 
 <script lang="ts">
+import Button from "@/components/Button.vue";
 import Notes from "@/components/Money/Notes.vue";
 import NumberPad from "@/components/Money/NumberPad.vue";
 import Tags from "@/components/Money/Tags.vue";
 import Types from "@/components/Money/Types.vue";
-import store from "@/store/index2";
+import store from "@/store/index";
+import oldStore from "@/store/index2";
 import recordStore from "@/store/recordStore";
-import tagStore from "@/store/tagStore";
 import Vue from "vue";
-import { Component, Watch } from "vue-property-decorator";
-
+import { Component } from "vue-property-decorator";
 type Tag = {
   id: string;
   name: string;
@@ -44,24 +40,18 @@ type RecordItem = {
 
 // 数据库升级 数据迁移
 @Component({
-  components: { NumberPad, Types, Notes, Tags },
+  components: { NumberPad, Types, Notes, Tags, Button },
+  computed: {
+  },
 })
 export default class Money extends Vue {
-  tags: Tag[] = store.tagList;
-  recordList = store.recordList;
+  recordList = oldStore .recordList;
   record: RecordItem = {
     tags: [],
     notes: "",
     type: "-",
     amount: 0,
   };
-
-  onUpdateTags(value: string[]) {
-    this.record.tags = value;
-  }
-  onUpdateTagsChanged(value: []) {
-    this.tags = value;
-  }
   onUpdateNotes(value: string) {
     this.record.notes = value;
   }

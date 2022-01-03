@@ -6,7 +6,7 @@
     </div>
     <ul class="current">
       <li
-        v-for="tag in dataSource"
+        v-for="tag in tagList"
         :key="tag.id"
         :class="selectedTags.indexOf(tag) >= 0 && 'selected'"
         @click="toggle(tag)"
@@ -18,12 +18,13 @@
 </template>
 
 <script lang="ts">
+import store from "@/store/index2";
 import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 
 @Component
 export default class tags extends Vue {
-  @Prop(Array) readonly dataSource: string[] | undefined;
+  tagList = store.tagList;
   selectedTags: string[] = [];
   newTagName = "";
   warn = "在这里输入标签名";
@@ -38,14 +39,14 @@ export default class tags extends Vue {
     }
   }
   create() {
-    const input = this.newTagName.trim();
-    if (input) {
-      if (this.dataSource) {
-        this.$emit("update:tags", [...this.dataSource, input]);
+    const name = this.newTagName.trim();
+    if (name) {
+      if (this.tagList) {
+        store.createTag(name);
       }
       this.warn = "在这里输入标签名";
     } else {
-      this.warn = "请输入正确的标签名";
+      this.warn = "标签名不能为空";
     }
     this.newTagName = "";
   }
