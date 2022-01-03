@@ -22,13 +22,11 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
 @Component({
-  computed: {
-    tagList() {
-      return this.$store.state.tagList;
-    },
-  },
 })
 export default class tags extends Vue {
+  get tagList() {
+      return this.$store.state.tagList;
+    }
   selectedTags: string[] = [];
   newTagName = "";
   warn = "在这里输入标签名";

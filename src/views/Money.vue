@@ -38,13 +38,11 @@ type RecordItem = {
 // 数据库升级 数据迁移
 @Component({
   components: { NumberPad, Types, Notes, Tags, Button },
-  computed: {
-    recordList() {
-      return this.$store.state.recordList;
-    },
-  },
 })
 export default class Money extends Vue {
+  get recordList() {
+      return this.$store.state.recordList;
+    }
   record: RecordItem = {
     tags: [],
     notes: "",
