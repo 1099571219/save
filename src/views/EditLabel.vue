@@ -7,7 +7,7 @@
     </div>
     <div class="note-wrapper">
       <Notes
-        :value="tag.name"
+        :value="currentTag.name"
         @update:value="update"
         fieldName="标签名"
         placeholder="请输入标签名"
@@ -30,7 +30,7 @@ import tagStore from "@/store/tagStore";
   components: { Notes, Button },
 })
 export default class EditLabel extends Vue {
-  get tag() {
+  get currentTag() {
     return this.$store.state.currentTag;
   }
   created() {
@@ -38,7 +38,7 @@ export default class EditLabel extends Vue {
     console.log(id)
     this.$store.commit('fetchTag')
     this.$store.commit("setCurrentTag", id);
-    if (!this.tag) {
+    if (!this.currentTag) {
       console.log('no tag')
       this.$router.replace("/404");
     }else{
@@ -46,13 +46,13 @@ export default class EditLabel extends Vue {
     }
   }
   update(name: string) {
-    if (this.tag) {
-      this.$store.commit("updateTag", { id: this.tag.id, name });
+    if (this.currentTag) {
+      this.$store.commit("updateTag", { id: this.currentTag.id, name });
     }
   }
   remove() {
-    if (this.tag) {
-      this.$store.commit("removeTag", this.tag.id);
+    if (this.currentTag) {
+      this.$store.commit("removeTag", this.currentTag.id);
     }
   }
   goBack() {
