@@ -24,9 +24,7 @@ import { Component } from "vue-property-decorator";
 @Component({
   computed: {
     tagList() {
-      return [];
-      // TODO
-      //  this.$store.commit.fetch();
+      return this.$store.state.tagList;
     },
   },
 })
@@ -34,28 +32,30 @@ export default class tags extends Vue {
   selectedTags: string[] = [];
   newTagName = "";
   warn = "在这里输入标签名";
+  created() {
+    this.$store.commit("fetchTag");
+  }
   toggle(tag: string) {
     const index = this.selectedTags.indexOf(tag);
     if (this.selectedTags.indexOf(tag) >= 0) {
       this.selectedTags.splice(index, 1);
+
       this.$emit("update:dataSource", this.selectedTags);
     } else {
       this.selectedTags.push(tag);
       this.$emit("update:dataSource", this.selectedTags);
+      // this.$store.state.tagList = this.selectedTags
     }
   }
   create() {
     const name = this.newTagName.trim();
-    // TODO
-    //   if (name) {
-    //     // if (this.tagList) {
-    //       // store.createTag(name);
-    //     }
-    //     this.warn = "在这里输入标签名";
-    //   } else {
-    //     this.warn = "标签名不能为空";
-    //   }
-    //   this.newTagName = "";
+    if (name) {
+      this.$store.commit("createTag", name);
+      this.warn = "在这里输入标签名";
+    } else {
+      this.warn = "标签名不能为空";
+    }
+    this.newTagName = "";
   }
 }
 </script>
