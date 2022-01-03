@@ -18,13 +18,19 @@
 </template>
 
 <script lang="ts">
-import store from "@/store/index2";
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
-@Component
+@Component({
+  computed: {
+    tagList() {
+      return [];
+      // TODO
+      //  this.$store.commit.fetch();
+    },
+  },
+})
 export default class tags extends Vue {
-  tagList = store.tagList;
   selectedTags: string[] = [];
   newTagName = "";
   warn = "在这里输入标签名";
@@ -40,15 +46,16 @@ export default class tags extends Vue {
   }
   create() {
     const name = this.newTagName.trim();
-    if (name) {
-      if (this.tagList) {
-        store.createTag(name);
-      }
-      this.warn = "在这里输入标签名";
-    } else {
-      this.warn = "标签名不能为空";
-    }
-    this.newTagName = "";
+    // TODO
+    //   if (name) {
+    //     // if (this.tagList) {
+    //       // store.createTag(name);
+    //     }
+    //     this.warn = "在这里输入标签名";
+    //   } else {
+    //     this.warn = "标签名不能为空";
+    //   }
+    //   this.newTagName = "";
   }
 }
 </script>

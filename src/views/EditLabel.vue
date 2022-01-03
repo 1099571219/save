@@ -24,7 +24,6 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Notes from "@/components/Money/Notes.vue";
 import Button from "@/components/Button.vue";
-import store from "@/store/index2";
 import tagStore from "@/store/tagStore";
 
 @Component({
@@ -33,14 +32,16 @@ import tagStore from "@/store/tagStore";
 export default class EditLabel extends Vue {
   tag?: { id: string; name: string } = undefined;
   created() {
-    this.tag = store.findTag(this.$route.params.id);
+    // TODO
+    // this.tag = store.findTag(this.$route.params.id);
     if (!this.tag) {
       this.$router.replace("/404");
     }
   }
   update(name: string) {
     if (this.tag) {
-      store.updateTag(this.tag.id, name);
+      // TODO
+      // store.updateTag(this.tag.id, name);
     }
   }
   remove() {

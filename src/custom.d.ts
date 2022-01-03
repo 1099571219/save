@@ -19,6 +19,6 @@ type TagListModel = {
     remove: (id: string) => boolean
 }
 
-interface Window {
-    // 
-}
+// interface Window {
+//     // 
+// }
