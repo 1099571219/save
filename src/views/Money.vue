@@ -3,7 +3,7 @@
     {{ recordList }}
     <number-pad :value.sync="record.amount" @submit="saveRecord" />
     <!-- 只要是传一个东西进去，然后要更新它就使用.sync 在内部使用$emit('update:value',更新后的参数) -->
-    <types :value.sync="record.type" />
+    <tabs :dataSource="recordTypeList" :value.sync="record.type"/>
     <div class="notes">
       <notes
         fieldName="备注"
@@ -11,7 +11,7 @@
         @update:value="onUpdateNotes"
       />
     </div>
-    <tags />
+    <Tags />
   </Layout>
 </template>
 
@@ -23,6 +23,9 @@ import Tags from "@/components/Money/Tags.vue";
 import Types from "@/components/Money/Types.vue";
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
+import Tabs from "@/components/Tabs.vue";
+import recordTypeList from "@/constants/recordTypeList";
+
 type Tag = {
   id: string;
   name: string;
@@ -37,26 +40,27 @@ type RecordItem = {
 
 // 数据库升级 数据迁移
 @Component({
-  components: { NumberPad, Types, Notes, Tags, Button },
+  components: { NumberPad, Types, Notes, Tags, Button, Tabs },
 })
 export default class Money extends Vue {
   get recordList() {
-      return this.$store.state.recordList;
-    }
+    return this.$store.state.recordList;
+  }
+  recordTypeList = recordTypeList;
   record: RecordItem = {
     tags: [],
     notes: "",
     type: "-",
     amount: 0,
   };
-  created(){
-    this.$store.commit('fetchRecords')
+  created() {
+    this.$store.commit("fetchRecords");
   }
   onUpdateNotes(value: string) {
     this.record.notes = value;
   }
   saveRecord() {
-    this.$store.commit('createRecord',this.record)
+    this.$store.commit("createRecord", this.record);
   }
 }
 </script>
