@@ -6,15 +6,10 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex) //把 store 绑到 vue.prototype 上
 
-type RootState = {
-  recordList: RecordItem[],
-  tagList: Tag[],
-  currentTag?: Tag
-}
 const store = new Vuex.Store({
   state: {//data
-    recordList: [] as RecordItem[],
-    tagList: [] as Tag[],
+    recordList: [] ,
+    tagList: [],
     currentTag: undefined
   } as RootState,
   mutations: {//methods 不能直接调
@@ -58,7 +53,7 @@ const store = new Vuex.Store({
     },
     createRecord(state, record: RecordItem) {
       const recordCopy: RecordItem = clone(record);
-      recordCopy.createdAt = new Date();
+      recordCopy.createdAt = new Date().toISOString();
       state.recordList?.push(recordCopy);//等价于&&
       store.commit('saveRecords')
     },

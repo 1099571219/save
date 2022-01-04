@@ -64,7 +64,7 @@ export default class Money extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 .layout-content {
   $bg: #dcf1d6;
   display: flex;

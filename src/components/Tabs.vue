@@ -47,6 +47,7 @@ export default class Types extends Vue {
     padding: 21px 0;
     width: 50%;
     display: flex;
+    height: 64px;
     justify-content: center;
     align-items: center;
     position: relative;

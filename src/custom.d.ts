@@ -8,7 +8,7 @@ type RecordItem = {
     notes: string;
     type: string;
     amount: number;
-    createdAt?: Date; //类 小于类型 / 构造函数
+    createdAt?: string; //类 小于类型 / 构造函数
 };
 type TagListModel = {
     data: Tag[]
@@ -19,6 +19,12 @@ type TagListModel = {
     remove: (id: string) => boolean
 }
 
+type RootState = {
+    recordList: RecordItem[],
+    tagList: Tag[],
+    currentTag?: Tag
+  }
+
 // interface Window {
-//     // 
+//     //
 // }
