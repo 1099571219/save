@@ -12,7 +12,9 @@
       </router-link>
     </div>
     <div class="createTag-wrapper">
-      <Button @click="createTag">新建标签</Button>
+      <input type="text" v-model="newTagName" :placeholder="warn" />
+      <Button @click="create">新建标签</Button>
+      <!-- <Button @click="createTag">新建标签</Button> -->
     </div>
   </Layout>
 </template>
@@ -22,15 +24,18 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Button from "@/components/Button.vue";
 import { mixins } from "vue-class-component";
-import TagHelper from '@/mixins/TagHelper'
+import TagHelper from "@/mixins/TagHelper";
+import CreateTagInText from "@/mixins/CreateTagInText";
+
 
 @Component({
   components: { Button },
+  mixins: [CreateTagInText],
 })
-export default class Labels extends mixins(TagHelper){
-  get  tags() {
-      return this.$store.state.tagList;
-    }
+export default class Labels extends mixins(TagHelper) {
+  get tags() {
+    return this.$store.state.tagList;
+  }
   created() {
     this.$store.commit("fetchTag");
   }
@@ -38,12 +43,17 @@ export default class Labels extends mixins(TagHelper){
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/style/Input.scss';
+
+input{
+  margin-right: 10px;
+}
 .tags {
   background-color: #fff;
   font-size: 16px;
   margin: 16px 16px;
   color: #666;
-  border-radius: 10%;
+  border-radius: 10px;
   overflow: hidden;
 
   > .tag {

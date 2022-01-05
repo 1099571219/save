@@ -22,8 +22,9 @@ type TagListModel = {
 type RootState = {
     recordList: RecordItem[],
     tagList: Tag[],
-    currentTag?: Tag
-  }
+    createTagError:Error | null,
+    currentTag?: Tag,
+}
 
 // interface Window {
 //     //

@@ -2,15 +2,16 @@
   <Layout classPreFix="layout">
     <number-pad :value.sync="record.amount" @submit="saveRecord" />
     <!-- 只要是传一个东西进去，然后要更新它就使用.sync 在内部使用$emit('update:value',更新后的参数) -->
-    <tabs :dataSource="recordTypeList" :value.sync="record.type"/>
+    <tabs :dataSource="recordTypeList" :value.sync="record.type" />
     <div class="notes">
       <notes
         fieldName="备注"
         placeholder="在这里输入备注"
         @update:value="onUpdateNotes"
+        :value.sync="record.notes"
       />
     </div>
-    <Tags />
+    <Tags @update:value="record.tags = $event" />
   </Layout>
 </template>
 
@@ -20,7 +21,7 @@ import Notes from "@/components/Money/Notes.vue";
 import NumberPad from "@/components/Money/NumberPad.vue";
 import Tags from "@/components/Money/Tags.vue";
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import { Component, Watch } from "vue-property-decorator";
 import Tabs from "@/components/Tabs.vue";
 import recordTypeList from "@/constants/recordTypeList";
 
@@ -58,7 +59,15 @@ export default class Money extends Vue {
     this.record.notes = value;
   }
   saveRecord() {
+    if (!this.record.tags || this.record.tags.length === 0) {
+      return window.alert("请选择至少一个标签");
+    }
+    if (this.record.amount === 0) {
+      return window.alert("请填写金额");
+    }
     this.$store.commit("createRecord", this.record);
+    window.alert("已保存");
+    this.record.notes = "";
   }
 }
 </script>
@@ -68,10 +77,6 @@ export default class Money extends Vue {
   $bg: #dcf1d6;
   display: flex;
   flex-direction: column-reverse;
-  background-color: lighten($color: $bg, $amount: 50%);
   overflow: auto;
-}
-.notes {
-  padding: 12px 0;
 }
 </style>

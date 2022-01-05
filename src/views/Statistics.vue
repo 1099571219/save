@@ -1,9 +1,11 @@
 <template>
   <Layout>
     <tabs classPrefix="type" :dataSource="typeList" :value.sync="type" />
-    <ol>
+    <ol v-if="groupedList.length > 0">
       <li v-for="(group, index) in groupedList" :key="index">
-        <h3 class="title">{{ beautify(group.title) }} <span>￥{{group.total}}</span></h3>
+        <h3 class="title">
+          {{ beautify(group.title) }} <span>￥{{ group.total }}</span>
+        </h3>
         <ol>
           <li v-for="item in group.items" :key="item.id" class="record">
             <span>{{ tagString(item.tags) }}</span
@@ -13,6 +15,7 @@
         </ol>
       </li>
     </ol>
+    <div v-else class="noResult">目前没有记录</div>
   </Layout>
 </template>
 
@@ -47,7 +50,7 @@ const oneDay = 86400 * 1000;
 })
 export default class Statistics extends Vue {
   tagString(tags: Tag[]) {
-    return tags.length === 0 ? "无" : tags.join(",");
+    return tags.length === 0 ? "无" : tags.map((t) => t.name).join("，");
   }
   beautify(string: string) {
     const day = dayjs(string);
@@ -77,6 +80,9 @@ export default class Statistics extends Vue {
       .sort(
         (a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf()
       );
+    if (newList.length === 0) {
+      return [] as Result;
+    }
     type Result = { title: string; total?: number; items: RecordItem[] }[];
 
     const result: Result = [
@@ -98,9 +104,9 @@ export default class Statistics extends Vue {
         });
       }
     }
-    result.map(group=>{
-      group.total = group.items.reduce((sum,item)=>sum+item.amount,0)
-    })
+    result.map((group) => {
+      group.total = group.items.reduce((sum, item) => sum + item.amount, 0);
+    });
 
     return result;
   }
@@ -117,12 +123,17 @@ export default class Statistics extends Vue {
 </script>
 
 <style scoped lang="scss">
+.noResult{
+  padding: 16px;
+  text-align: center;
+}
 ::v-deep {
   .type-tabs-item {
     background: #dcf1d6;
-    border-radius: 50px;
+    // border-radius: 50px;
     &.selected {
       background: #ffd571;
+      box-shadow: inset 0 0 0px 5px rgba(0, 0, 0, .5);
       &::after {
         display: none;
       }

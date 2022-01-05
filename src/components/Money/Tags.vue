@@ -20,52 +20,47 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
+import CreateTagInText from '@/mixins/CreateTagInText'
 
 @Component({
+  mixins:[CreateTagInText]
 })
 export default class tags extends Vue {
-  get tagList() {
-      return this.$store.state.tagList;
-    }
-  selectedTags: string[] = [];
-  newTagName = "";
   warn = "在这里输入标签名";
+  newTagName = "";
+
+  get tagList() {
+    return this.$store.state.tagList;
+  }
+  selectedTags: string[] = [];
   created() {
     this.$store.commit("fetchTag");
   }
   toggle(tag: string) {
-    // 有BUG
     const index = this.selectedTags.indexOf(tag);
     if (this.selectedTags.indexOf(tag) >= 0) {
       this.selectedTags.splice(index, 1);
-      this.$emit("update:dataSource", this.selectedTags);
+      this.$emit("update:value", this.selectedTags);
     } else {
       this.selectedTags.push(tag);
-      this.$emit("update:dataSource", this.selectedTags);
+      this.$emit("update:value", this.selectedTags);
       // this.$store.state.tagList = this.selectedTags
     }
   }
-  create() {
-    const name = this.newTagName.trim();
-    if (name) {
-      this.$store.commit("createTag", name);
-      this.warn = "在这里输入标签名";
-    } else {
-      this.warn = "标签名不能为空";
-    }
-    this.newTagName = "";
+
+  onInputChange(event: string) {
+    this.newTagName = event;
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/style/Input.scss';
 .tags {
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
   $bg: #dcf1d6;
-  background-color: lighten($color: $bg, $amount: 100%);
-
   > .current {
     display: flex;
     flex-wrap: wrap-reverse;
@@ -90,11 +85,7 @@ export default class tags extends Vue {
     margin-left: 16px;
     padding-top: 16px;
     padding-bottom: 13.38px;
-    > input {
-      margin-left: 1em;
-      border: none;
-      background: transparent;
-    }
+    display: flex;
     button {
       font-size: 16px;
       color: #666;

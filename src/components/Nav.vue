@@ -26,7 +26,7 @@ export default Vue.extend({
 @import "~@/assets/style/helper.scss";
 nav {
   display: flex;
-  background: #fff;
+  background: lighten($color: #dcf1d6, $amount: 5%);
   @extend %outerShadow;
   > .item {
     padding: 2px 0;
@@ -41,7 +41,9 @@ nav {
     }
   }
   > .item.selected {
-    color: $color-highlight;
+    color: #fff;
+    box-shadow:inset 0 0 1px 4px rgba(0, 0, 0, .5);
+    background-color: #ffd571;
   }
 }
 </style>
