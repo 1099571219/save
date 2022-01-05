@@ -1,6 +1,5 @@
 <template>
   <Layout classPreFix="layout">
-    {{ recordList }}
     <number-pad :value.sync="record.amount" @submit="saveRecord" />
     <!-- 只要是传一个东西进去，然后要更新它就使用.sync 在内部使用$emit('update:value',更新后的参数) -->
     <tabs :dataSource="recordTypeList" :value.sync="record.type"/>
