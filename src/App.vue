@@ -16,8 +16,10 @@ body {
   font-size: 16px;
   background: #dcf1d6;
 }
-#app {
-  // display: flex;
-  // flex-direction: column;
+@media(min-width: 500px){
+  #app {
+    max-width: 500px;
+    margin: 0 auto;
+  }
 }
 </style>
