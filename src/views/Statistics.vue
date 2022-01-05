@@ -1,18 +1,14 @@
 <template>
   <Layout>
-    <tabs classPrefix="types" :dataSource="typeList" :value.sync="type" />
-    <tabs
-      classPrefix="interval"
-      :dataSource="intervalList"
-      :value.sync="interval"
-    />
+    <tabs classPrefix="type" :dataSource="typeList" :value.sync="type" />
     <ol>
-      <li v-for="(group,index) in result" :key="index">
-        <h3 class="title">{{group.title}}</h3>
+      <li v-for="(group, index) in groupedList" :key="index">
+        <h3 class="title">{{ beautify(group.title) }}</h3>
         <ol>
-          <li v-for="item in group.items" :key="item.id"
-              class="record"
-          ><span>{{tagString(item.tags)}}</span><span class="notes">{{item.notes}}</span><span>￥{{item.amount}}</span>
+          <li v-for="item in group.items" :key="item.id" class="record">
+            <span>{{ tagString(item.tags) }}</span
+            ><span class="notes">{{ item.notes }}</span
+            ><span>￥{{ item.amount }}</span>
           </li>
         </ol>
       </li>
@@ -20,14 +16,15 @@
   </Layout>
 </template>
 
-
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import tabs from "@/components/Tabs.vue";
+import dayjs from "dayjs";
+import clone from "@/components/lib/clone";
 
 type RecordItem = {
-  tags: string[];
+  tags: Tag[];
   notes: string;
   type: string;
   amount: number;
@@ -43,39 +40,68 @@ type Tag = {
   name: string;
 };
 
+const oneDay = 86400 * 1000;
+
 @Component({
   components: { tabs },
 })
 export default class Statistics extends Vue {
-   tagString(tags: Tag[]) {
-      return tags.length === 0 ? '无' : tags.join(',');
+  tagString(tags: Tag[]) {
+    return tags.length === 0 ? "无" : tags.join(",");
+  }
+  beautify(string: string) {
+    const day = dayjs(string);
+    const now = dayjs();
+    if (day.isSame(now, "day")) {
+      return "今天";
+    } else if (day.isSame(now.subtract(1, "day"), "day")) {
+      return "昨天";
+    } else if (day.isSame(now.subtract(2, "day"), "day")) {
+      return "前天";
+    } else if (day.isSame(now, "year")) {
+      return day.format("M月D日");
+    } else {
+      return day.format("YYYY年MM月DD日");
     }
-    get recordList() {
-      return (this.$store.state as RootState).recordList;
+  }
+  get recordList() {
+    return (this.$store.state as RootState).recordList;
+  }
+  get groupedList() {
+    const { recordList } = this;
+    if (recordList.length === 0) {
+      return [];
     }
-    get result() {
-      const {recordList} = this;
-      type HashTableValue = { title: string, items: RecordItem[] }
-      const hashTable: { [key: string]: HashTableValue } = {};
-      for (let i = 0; i < recordList.length; i++) {
-        const [date, time] = recordList[i].createdAt!.split('T');
-        hashTable[date] = hashTable[date] || {title: date, items: []};
-        hashTable[date].items.push(recordList[i]);
-        console.log(date)
+    type HashTableValue = { title: string; items: RecordItem[] };
+    const newList = clone(recordList).sort(
+      (a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf()
+    );
+
+    const result = [
+      {
+        title: dayjs(recordList[0].createdAt).format("YYYY-MM-DD"),
+        items: [recordList[0]],
+      },
+    ];
+    for (let i = 1; i < newList.length; i++) {
+      const current = newList[i];
+      const last = result[result.length - 1];
+      if (dayjs(last.title).isSame(dayjs(current.createdAt), "day")) {
+        last.items.push(current);
+      } else {
+        result.push({
+          title: dayjs(current.createdAt).format("YYYY-MM-DD"),
+          items: [current],
+        });
       }
-      return hashTable;
     }
-    beforeCreate() {
-      this.$store.commit('fetchRecords');
-    }
+    return result;
+  }
+  beforeCreate() {
+    this.$store.commit("fetchRecords");
+  }
 
   type = "-";
-  interval = "day";
-  intervalList = [
-    { text: "按天", value: "day" },
-    { text: "按周", value: "week" },
-    { text: "按月", value: "month" },
-  ];
   typeList = [
     { text: "支出", value: "-" },
     { text: "收入", value: "+" },
@@ -86,9 +112,10 @@ export default class Statistics extends Vue {
 <style scoped lang="scss">
 ::v-deep {
   .type-tabs-item {
-    background: white;
+    background: #dcf1d6;
+    border-radius: 50px;
     &.selected {
-      background: #c4c4c4;
+      background: #ffd571;
       &::after {
         display: none;
       }
@@ -110,7 +137,7 @@ export default class Statistics extends Vue {
   @extend %item;
   display: flex;
   flex-direction: columns;
-  >span{
+  > span {
     align-self: center;
   }
 }

@@ -38,7 +38,7 @@ export default class Types extends Vue {
 <style lang="scss" scoped>
 .tabs {
   display: flex;
-  background-color: #a2d79f;
+  background-color: #dcf1d6;
   font-size: 24px;
   color: #666;
   text-align: center;
@@ -51,7 +51,9 @@ export default class Types extends Vue {
     justify-content: center;
     align-items: center;
     position: relative;
-    &.selected::after {
+    &.selected{
+      background-color: #ffd571;
+      &::after {
       content: "";
       position: absolute;
       bottom: 0;
@@ -59,6 +61,7 @@ export default class Types extends Vue {
       width: 100%;
       height: 4px;
       background-color: #666;
+    }
     }
   }
 }
