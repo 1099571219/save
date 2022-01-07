@@ -52,8 +52,8 @@ export default class Types extends Vue {
     align-items: center;
 
     position: relative;
-      border-radius: 20px 0px 0 0;
-    &:last-child{
+    border-radius: 20px 0px 0 0;
+    &:last-child {
       border-radius: 0px 20px 0 0;
     }
 

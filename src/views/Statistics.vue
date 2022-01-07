@@ -138,10 +138,10 @@ export default class Statistics extends Vue {
 @import "~@/assets/style/backgroundTitle.scss";
 @import "~@/assets/style/background.scss";
 .content {
-  border-radius: 20px;
-  overflow: hidden;
   margin: 0 5vw;
   background-color: #f5f6fa;
+  border-radius: 20px;
+
   @media (min-width: 500px) {
     max-width: 450px;
     margin: 0 25px;
@@ -151,7 +151,7 @@ export default class Statistics extends Vue {
     max-height: 68vh;
     min-height: 10vh;
     @media (min-width:500px) {
-    max-height: 70vh;
+    max-height: 68vh;
     }
   }
 }
@@ -160,12 +160,12 @@ export default class Statistics extends Vue {
   text-align: center;
 }
 .tabs {
+  border-radius: 20px 20px 0 0 ;
+  overflow: hidden;
 }
 ::v-deep {
   .type-tabs-item {
-    // border-radius: 50px;
     &.selected {
-      background: #fff;
       &::after {
         display: block;
       }

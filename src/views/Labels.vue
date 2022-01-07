@@ -81,11 +81,6 @@ export default class Labels extends mixins(TagHelper) {
   }
 }
 .createTag {
-  background-color: #ffd571;
-  border: none;
-  height: 40px;
-  color: #fff;
-  border-radius: 10%;
   &-wrapper {
     text-align: center;
     position: fixed;
@@ -96,7 +91,11 @@ export default class Labels extends mixins(TagHelper) {
     transform: translateX(-50%);
     width: 100%;
     input {
+      padding: 1vh 0;
+      padding-left: 1em;
       margin-right: 10px;
+
+      max-width: 50vw;
     }
   }
 }

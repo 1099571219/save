@@ -71,6 +71,8 @@ export default class EditLabel extends Vue {
   align-items: center;
   border-radius: 10px;
   > .name {
+    min-width: 90px;
+
     color: #333;
     font-size: 16px;
     padding: 0 16px;

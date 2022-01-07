@@ -23,18 +23,21 @@ export default class notes extends Vue {
   @Prop() placeholder?: string;
   onValueChanged(value: string) {
     this.$emit("update:value", value);
-    console.log(value)
+    console.log(value);
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .notes {
+  @media (min-width: 500px) {
+    padding: 1vw;
+  }
   display: flex;
-  padding: 15px 0;
+  padding: 3vw;
   background-color: #fff;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
   > .name {
     color: #333;
     font-size: 14px;
@@ -45,6 +48,7 @@ export default class notes extends Vue {
     background: transparent;
     border: none;
     color: #666;
+    max-width: 60vw;
   }
 }
 </style>

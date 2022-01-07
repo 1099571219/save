@@ -92,7 +92,7 @@ export default class Money extends Vue {
   .backgroundTitle {
     width: 100vw;
     text-align: center;
-    top: 1vh;
+    top: 2vh;
     color: #fff;
     left: 50vw;
     transform: translateX(-50%);
@@ -111,11 +111,14 @@ export default class Money extends Vue {
         background-color: transparent;
       }
     }
-
   }
 }
 .background {
-  padding-top: 10vh;
+  padding-top: 16vh;
+  @media (min-width:500px) {
+    padding-top: 11vh;
+  }
+
   .content {
     $bg: #dcf1d6;
     display: flex;
@@ -123,16 +126,13 @@ export default class Money extends Vue {
     @media (min-width: 500px) {
       margin: 0 25px;
       max-width: 450px;
-      max-height: 82vh;
+      max-height: 80vh;
     }
     margin: 0 5vw;
-    max-height: 82vh;
+    max-height: 150vw;
   }
 }
 ::v-deep .tags {
-  overflow: auto;
   background-color: #fff;
-  .current {
-  }
 }
 </style>

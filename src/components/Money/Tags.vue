@@ -1,19 +1,21 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button @click="create">新增标签</button>
       <input type="text" v-model="newTagName" :placeholder="warn" />
+      <button @click="create">新增标签</button>
     </div>
-    <ul class="current">
-      <li
-        v-for="tag in tagList"
-        :key="tag.id"
-        :class="selectedTags.indexOf(tag) >= 0 && 'selected'"
-        @click="toggle(tag)"
-      >
-        {{ tag.name }}
-      </li>
-    </ul>
+    <div class="scroll">
+      <ul class="current">
+        <li
+          v-for="tag in tagList"
+          :key="tag.id"
+          :class="selectedTags.indexOf(tag) >= 0 && 'selected'"
+          @click="toggle(tag)"
+        >
+          {{ tag.name }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -61,38 +63,51 @@ export default class tags extends Vue {
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
-  > .current {
-    display: flex;
-    flex-wrap: wrap-reverse;
-    flex-direction: row;
-    > li {
-      $bg: #fdae91;
-      background-color: $bg;
-      color: #344763;
-      $h: 50px;
-      line-height: $h;
-      height: $h;
-      border-radius: 10px;
-      padding: 0px 16px;
-      margin: 12px;
+  > .scroll {
+    overflow: auto;
+    max-height: 40vw;
+    @media (min-width: 500px) {
+      max-height: 19vh;
+    }
+    > .current {
       display: flex;
-      &.selected {
-        background-color: darken($color: $bg, $amount: 30%);
-        color: #eee;
+      flex-wrap: wrap-reverse;
+      flex-direction: row;
+      > li {
+        $bg: #fdae91;
+        background-color: $bg;
+        color: #344763;
+        $h: 50px;
+        line-height: $h;
+        height: $h;
+        border-radius: 10px;
+        padding: 0px 16px;
+        margin: 12px;
+        display: flex;
+        &.selected {
+          background-color: darken($color: $bg, $amount: 30%);
+          color: #eee;
+        }
       }
     }
   }
   > .new {
-    margin-left: 16px;
-    padding-top: 16px;
+    @media (min-width: 500px) {
+      padding: 1.5vw;
+    }
+    padding: 3vw;
     display: flex;
+    align-items: center;
+    justify-content: space-around;
+    input {
+      max-width: 70vw;
+    }
     button {
       font-size: 16px;
-      color: #666;
+      color: #55bc7e;
       background: transparent;
       border: none;
-      border-bottom: 1px solid #666;
-      padding: 0 5px;
+      border-bottom: 1px solid #55bc7e;
     }
   }
 }
