@@ -5,7 +5,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex) //把 store 绑到 vue.prototype 上
-
 const store = new Vuex.Store({
   state: {//data
     recordList: [],

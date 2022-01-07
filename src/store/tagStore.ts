@@ -1,6 +1,5 @@
 import createId from "@/components/lib/createId";
 const localStorageKeyName = "tagList";
-
 const tagStore = {
     // tag store
     tagList: [] as Tag[],

@@ -1,9 +1,23 @@
+import { MessageType } from "element-ui/types/message";
 import Vue from "vue";
 import Component from "vue-class-component";
 
-const map:{[key:string]:string} ={
-    'tag name duplicated':'标签名重复',
-    'success':'创建成功'
+interface tagToast { 
+    showClose: boolean,
+    message: string,
+    type: string
+}
+const map:{[key:string]:tagToast} ={
+    'tag name duplicated': {
+        showClose: true,
+        message: '标签名重复',
+        type: 'warning'
+    },
+    'success': {
+        showClose: true,
+        message: '创建成功',
+        type: 'success'
+    },
 }
 
 @Component
@@ -15,7 +29,13 @@ export class CreateTagInText extends Vue {
         if (name) {
             this.$store.commit("createTag", name);
             if (this.$store.state.createTagError) {
-                window.alert(map[this.$store.state.createTagError.message]|| '未知错误')
+                const toastText = (map[this.$store.state.createTagError.message]|| { message: '未知错误',type: 'warning'} )
+                this.$message({
+                    showClose: toastText.showClose || true,
+                    message : toastText.message,
+                    type : toastText.type as MessageType
+                });
+                // window.alert(map[this.$store.state.createTagError.message]|| '未知错误')
             }
 
             this.warn = "在这里输入标签名";

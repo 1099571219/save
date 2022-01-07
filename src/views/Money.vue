@@ -74,13 +74,34 @@ export default class Money extends Vue {
   }
   saveRecord() {
     if (!this.record.tags || this.record.tags.length === 0) {
-      return window.alert("请选择至少一个标签");
+      return this.$message({
+        showClose: true,
+        message: '请至少选择一个标签',
+        type: 'error',
+        center: true,
+      });
+      // return window.alert("请选择至少一个标签");
     }
     if (this.record.amount === 0) {
-      return window.alert("请填写金额");
+      return this.$message({
+        showClose: true,
+        message: '请填写金额',
+        type: 'error',
+        center: true,
+      });
+
+      // return window.alert("请填写金额");
     }
     this.$store.commit("createRecord", this.record);
-    window.alert("已保存");
+
+    this.$message({
+      showClose: true,
+      message: '保存成功',
+      type: 'success',
+      center: true,
+    });
+
+    // return window.alert("保存成功");
     this.record.notes = "";
   }
 }
