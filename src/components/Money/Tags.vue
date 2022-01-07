@@ -63,11 +63,12 @@ export default class tags extends Vue {
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
+
   > .scroll {
     overflow: auto;
-    max-height: 40vw;
+    height: 35vw;
     @media (min-width: 500px) {
-      max-height: 19vh;
+      height: 18vh;
     }
     > .current {
       display: flex;
@@ -80,6 +81,7 @@ export default class tags extends Vue {
         $h: 50px;
         line-height: $h;
         height: $h;
+        font-size: 18px;;
         border-radius: 10px;
         padding: 0px 16px;
         margin: 12px;

@@ -106,7 +106,6 @@ export default class Statistics extends Vue {
     for (let i = 1; i < newList.length; i++) {
       const current = newList[i];
       const last = result[result.length - 1];
-      console.log(current.createdAt);
       if (dayjs(last.title).isSame(dayjs(current.createdAt), "day")) {
         last.items.push(current);
       } else {
