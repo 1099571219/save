@@ -26,6 +26,9 @@ export default Vue.extend({
 <style lang='scss' scoped>
 @import "~@/assets/style/helper.scss";
 nav {
+  position:fixed;
+  bottom:0;
+  width:100%;
   display: flex;
   background-color: #ffffff;
   border-radius: 20px;

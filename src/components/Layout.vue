@@ -19,6 +19,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  padding-bottom:0.58rem;
 }
 .content {
   flex-grow: 1;

@@ -135,10 +135,10 @@ export default class Money extends Vue {
   }
 }
 .background {
-  padding-top: 16vh;
-  @media (min-width:500px) {
-    padding-top: 11vh;
-  }
+  padding-top: .75rem;
+  // @media (min-width:500px) {
+  //   padding-top: 11vh;
+  // }
 
   .content {
     $bg: #dcf1d6;
