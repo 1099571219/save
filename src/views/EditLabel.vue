@@ -62,11 +62,32 @@ export default class EditLabel extends Vue {
 </script>
 
 <style lang="scss" scoped>
+::v-deep .notes {
+  display: flex;
+  padding: 25px 0;
+  margin: 0 5vw;
+  background-color: #fff;
+  overflow: hidden;
+  align-items: center;
+  border-radius: 10px;
+  > .name {
+    color: #333;
+    font-size: 16px;
+    padding: 0 16px;
+  }
+  input {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    color: #666;
+  }
+}
 .navBar {
   text-align: center;
-  font-size: 16px;
-  padding: 12px 16px;
-  background: white;
+  font-size: 20px;
+  padding: 20px 16px;
+  background: #55bc7e;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -82,7 +103,7 @@ export default class EditLabel extends Vue {
   }
 }
 .note-wrapper {
-  background: white;
+  // background: white;
   margin-top: 8px;
 }
 .button-wrapper {

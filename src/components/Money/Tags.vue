@@ -20,10 +20,10 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import CreateTagInText from '@/mixins/CreateTagInText'
+import CreateTagInText from "@/mixins/CreateTagInText";
 
 @Component({
-  mixins:[CreateTagInText]
+  mixins: [CreateTagInText],
 })
 export default class tags extends Vue {
   warn = "在这里输入标签名";
@@ -55,26 +55,27 @@ export default class tags extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/style/Input.scss';
+@import "~@/assets/style/Input.scss";
 .tags {
+  position: relative;
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
-  $bg: #dcf1d6;
   > .current {
     display: flex;
     flex-wrap: wrap-reverse;
     flex-direction: row;
     > li {
-      $bg: #a2d79f;
+      $bg: #fdae91;
       background-color: $bg;
-      color: #666;
-      $h: 24px;
+      color: #344763;
+      $h: 50px;
       line-height: $h;
       height: $h;
-      border-radius: $h/2;
-      padding: 0 16px;
+      border-radius: 10px;
+      padding: 0px 16px;
       margin: 12px;
+      display: flex;
       &.selected {
         background-color: darken($color: $bg, $amount: 30%);
         color: #eee;
@@ -84,7 +85,6 @@ export default class tags extends Vue {
   > .new {
     margin-left: 16px;
     padding-top: 16px;
-    padding-bottom: 13.38px;
     display: flex;
     button {
       font-size: 16px;

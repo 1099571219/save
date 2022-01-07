@@ -31,10 +31,10 @@ export default class notes extends Vue {
 <style lang="scss" scoped>
 .notes {
   display: flex;
-  padding: 25px 0;
+  padding: 15px 0;
   background-color: #fff;
   align-items: center;
-
+  border-radius: 10px;
   > .name {
     color: #333;
     font-size: 14px;

@@ -12,12 +12,14 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .button {
-  background-color: #ffd571;
+  background-color: #55bc7e;
   border: none;
   height: 40px;
   padding: 0 16px;
   color: #fff;
   border-radius: 10%;
+  min-width: 4em;
+
   &-wrapper {
     text-align: center;
     margin-top: 44px;

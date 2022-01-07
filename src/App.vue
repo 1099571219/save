@@ -14,12 +14,16 @@ body {
   font-family: $font-hei;
   line-height: 1.5;
   font-size: 16px;
-  background: #dcf1d6;
+  background: #f5f6fa;
 }
-@media(min-width: 500px){
+@media (min-width: 500px) {
   #app {
     max-width: 500px;
     margin: 0 auto;
+    background: #f5f6fa;
+  }
+  body{
+    background-color: #f5f6fa;
   }
 }
 </style>

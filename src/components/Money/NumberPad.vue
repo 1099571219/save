@@ -78,25 +78,28 @@ export default class numberPad extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 .numberPad {
-  background-color: #fff;
   .output {
     @extend %innerShadow;
     text-align: right;
     font-size: 36px;
     color: #666;
+    padding: 15px 0;
     padding-right: 16px;
-    padding-top: 26px;
-    padding-bottom: 24px;
     font-family: Consolas, monospace;
+    background-color: #fff;
+    border-radius: 20px;
   }
   .buttons {
     @extend %clearFix;
+    border-radius: 20px;
+    overflow: hidden;
     > button {
       float: left;
       height: 7.9vh;
       width: 25%;
+      color: #344763 ;
       border: none;
-      $bg: darken(#dcf1d6, 20%);
+      $bg: #cbf0c5;
       &.ok {
         height: 7.9vh * 2;
         float: right;
@@ -104,27 +107,29 @@ export default class numberPad extends Vue {
       }
       &:nth-child(1),
       &:nth-child(2),
-      &:nth-child(3),
-      &:nth-child(4) {
-        background: darken($bg, 0.5% * 1);
+      &:nth-child(3) {
+        background: $bg;
       }
       &:nth-child(5),
       &:nth-child(6),
-      &:nth-child(7),
-      &:nth-child(8) {
-        background: darken($bg, 0.5% * 3);
+      &:nth-child(7) {
+        background: $bg;
       }
       &:nth-child(9),
       &:nth-child(10),
       &:nth-child(11) {
-        background: darken($bg, 0.5% * 6);
+        background: $bg;
       }
       &:nth-child(13),
       &:nth-child(14) {
-        background: darken($bg, 0.5% * 9);
+        background: $bg;
       }
       &:nth-child(13) {
         width: 50%;
+      }
+      &:nth-child(4),
+      &:nth-child(8) {
+        background-color: #55bc7e;
       }
     }
   }

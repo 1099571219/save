@@ -19,7 +19,14 @@ new Vue({
 }).$mount('#app')
 
 if (document.documentElement.clientWidth > 500) {
-  window.alert('建议使用手机打开本页面，以保证最佳浏览效果')
+  // window.alert('建议使用手机打开本页面，以保证最佳浏览效果')
+  const string1 = document.createElement('h2')
+  string1.innerHTML = '扫描查看移动端'
+  document.body.appendChild(string1)
+  string1.style.position = 'fixed'
+  string1.style.top = '63vh'
+  string1.style.left='2vw'
+
   const img = document.createElement('img')
   img.src = './qrcode.png'
   img.style.maxWidth = '25vh'

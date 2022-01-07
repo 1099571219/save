@@ -1,17 +1,31 @@
 <template>
   <Layout classPreFix="layout">
-    <number-pad :value.sync="record.amount" @submit="saveRecord" />
-    <!-- 只要是传一个东西进去，然后要更新它就使用.sync 在内部使用$emit('update:value',更新后的参数) -->
-    <tabs :dataSource="recordTypeList" :value.sync="record.type" />
-    <div class="notes">
-      <notes
-        fieldName="备注"
-        placeholder="在这里输入备注"
-        @update:value="onUpdateNotes"
-        :value.sync="record.notes"
-      />
+    <div class="background">
+      <div class="content">
+        <h1 class="backgroundTitle">欢迎使用小柴记账</h1>
+        <number-pad
+          :value.sync="record.amount"
+          @submit="saveRecord"
+          class="numberPad"
+        />
+        <!-- 只要是传一个东西进去，然后要更新它就使用.sync 在内部使用$emit('update:value',更新后的参数) -->
+        <div class="notes">
+          <notes
+            fieldName="备注"
+            placeholder="在这里输入备注"
+            @update:value="onUpdateNotes"
+            :value.sync="record.notes"
+          />
+        </div>
+
+        <Tags @update:value="record.tags = $event" class="tags" />
+        <tabs
+          class="tabs"
+          :dataSource="recordTypeList"
+          :value.sync="record.type"
+        />
+      </div>
     </div>
-    <Tags @update:value="record.tags = $event" />
   </Layout>
 </template>
 
@@ -73,10 +87,52 @@ export default class Money extends Vue {
 </script>
 
 <style lang="scss" scoped >
-::v-deep .layout-content {
-  $bg: #dcf1d6;
-  display: flex;
-  flex-direction: column-reverse;
+@import "~@/assets/style/backgroundTitle.scss";
+@import "~@/assets/style/background.scss";
+  .backgroundTitle {
+    width: 100vw;
+    text-align: center;
+    top: 1vh;
+    color: #fff;
+    left: 50vw;
+    transform: translateX(-50%);
+    @media (min-width:500px) {
+    width: auto;
+    }
+  }
+::v-deep .tabs {
+  background-color: transparent;
+  color: #fff;
+  &-item {
+    height: 44px;
+    &.selected {
+      background-color: #fff;
+      &::after {
+        background-color: transparent;
+      }
+    }
+
+  }
+}
+.background {
+  padding-top: 10vh;
+  .content {
+    $bg: #dcf1d6;
+    display: flex;
+    flex-direction: column-reverse;
+    @media (min-width: 500px) {
+      margin: 0 25px;
+      max-width: 450px;
+      max-height: 82vh;
+    }
+    margin: 0 5vw;
+    max-height: 82vh;
+  }
+}
+::v-deep .tags {
   overflow: auto;
+  background-color: #fff;
+  .current {
+  }
 }
 </style>

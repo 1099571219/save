@@ -1,21 +1,33 @@
 <template>
   <Layout>
-    <tabs classPrefix="type" :dataSource="typeList" :value.sync="type" />
-    <ol v-if="groupedList.length > 0">
-      <li v-for="(group, index) in groupedList" :key="index">
-        <h3 class="title">
-          {{ beautify(group.title) }} <span>￥{{ group.total }}</span>
-        </h3>
-        <ol>
-          <li v-for="item in group.items" :key="item.id" class="record">
-            <span>{{ tagString(item.tags) }}</span
-            ><span class="notes">{{ item.notes }}</span
-            ><span>￥{{ item.amount }}</span>
-          </li>
-        </ol>
-      </li>
-    </ol>
-    <div v-else class="noResult">目前没有记录</div>
+    <div class="background">
+      <h1 class="backgroundTitle">统计</h1>
+      <div class="content">
+        <tabs
+          class="tabs"
+          classPrefix="type"
+          :dataSource="typeList"
+          :value.sync="type"
+        />
+        <div class="scroll">
+          <ol v-if="groupedList.length > 0">
+            <li v-for="(group, index) in groupedList" :key="index">
+              <h3 class="title">
+                {{ beautify(group.title) }} <span>￥{{ group.total }}</span>
+              </h3>
+              <ol>
+                <li v-for="item in group.items" :key="item.id" class="record">
+                  <span>{{ tagString(item.tags) }}</span
+                  ><span class="notes">{{ item.notes }}</span
+                  ><span>￥{{ item.amount }}</span>
+                </li>
+              </ol>
+            </li>
+          </ol>
+          <div v-else class="noResult">目前没有记录</div>
+        </div>
+      </div>
+    </div>
   </Layout>
 </template>
 
@@ -123,19 +135,39 @@ export default class Statistics extends Vue {
 </script>
 
 <style scoped lang="scss">
-.noResult{
+@import "~@/assets/style/backgroundTitle.scss";
+@import "~@/assets/style/background.scss";
+.content {
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0 5vw;
+  background-color: #f5f6fa;
+  @media (min-width: 500px) {
+    max-width: 450px;
+    margin: 0 25px;
+  }
+  .scroll {
+    overflow: auto;
+    max-height: 68vh;
+    min-height: 10vh;
+    @media (min-width:500px) {
+    max-height: 70vh;
+    }
+  }
+}
+.noResult {
   padding: 16px;
   text-align: center;
 }
+.tabs {
+}
 ::v-deep {
   .type-tabs-item {
-    background: #dcf1d6;
     // border-radius: 50px;
     &.selected {
-      background: #ffd571;
-      box-shadow: inset 0 0 0px 5px rgba(0, 0, 0, .5);
+      background: #fff;
       &::after {
-        display: none;
+        display: block;
       }
     }
   }
