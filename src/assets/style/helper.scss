@@ -13,9 +13,9 @@ $color-highlight:#ffd571;
     }
   }
   %outerShadow{
-    box-shadow: 0 0 5px fade-out($color: black, $amount: 0.6)
+    box-shadow: 0 0 .3125rem fade-out($color: black, $amount: 0.6)
   }
   %innerShadow{
-    box-shadow: inset 0 -5px 5px -5px fade-out($color: black, $amount: 0.6),
-    inset 0 5px 5px -5px fade-out($color: black, $amount: 0.6);
+    box-shadow: inset 0 -0.1rem .1rem -0.1rem fade-out($color: black, $amount: 0.6),
+    inset 0 .1rem .1rem -0.1rem fade-out($color: black, $amount: 0.6);
   }

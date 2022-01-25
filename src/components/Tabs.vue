@@ -40,7 +40,6 @@ export default class Types extends Vue {
 .tabs {
   display: flex;
   background-color: #fff;
-  font-size: 24px;
   color: #344763;
   text-align: center;
   max-height: 64px;
@@ -50,13 +49,11 @@ export default class Types extends Vue {
     height: 64px;
     justify-content: center;
     align-items: center;
-
     position: relative;
     border-radius: 20px 0px 0 0;
     &:last-child {
       border-radius: 0px 20px 0 0;
     }
-
     &.selected {
       color: #344763;
       background-color: transparent;

@@ -1,13 +1,3 @@
-.background {
-    max-width: 500px;
-    max-height: 50vw;
-    background-color: #55bc7e;
-    padding-top: 15vh;
-  }
-@media (min-width:500px) {
-    .background {
-        max-width: 500px;
-        max-height: 30vh;
-        background-color: #55bc7e;
-      }
-}
+$paddingTop: 2rem;
+
+$mainMargin: 0 0.3rem;

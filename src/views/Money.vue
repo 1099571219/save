@@ -1,14 +1,15 @@
 <template>
   <Layout classPreFix="layout">
-    <div class="background">
       <div class="content">
-        <h1 class="backgroundTitle">欢迎使用小柴记账</h1>
-        <number-pad
-          :value.sync="record.amount"
-          @submit="saveRecord"
-          class="numberPad"
+        <h1 class="mainTitle">欢迎使用小柴记账</h1>
+        <tabs
+          class="tabs"
+          :dataSource="recordTypeList"
+          :value.sync="record.type"
         />
         <!-- 只要是传一个东西进去，然后要更新它就使用.sync 在内部使用$emit('update:value',更新后的参数) -->
+
+        <Tags @update:value="record.tags = $event" class="tags" />
         <div class="notes">
           <notes
             fieldName="备注"
@@ -17,14 +18,11 @@
             :value.sync="record.notes"
           />
         </div>
-
-        <Tags @update:value="record.tags = $event" class="tags" />
-        <tabs
-          class="tabs"
-          :dataSource="recordTypeList"
-          :value.sync="record.type"
+        <number-pad
+          :value.sync="record.amount"
+          @submit="saveRecord"
+          class="numberPad"
         />
-      </div>
     </div>
   </Layout>
 </template>
@@ -35,9 +33,10 @@ import Notes from "@/components/Money/Notes.vue";
 import NumberPad from "@/components/Money/NumberPad.vue";
 import Tags from "@/components/Money/Tags.vue";
 import Vue from "vue";
-import { Component, Watch } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 import Tabs from "@/components/Tabs.vue";
 import recordTypeList from "@/constants/recordTypeList";
+import popMessage from "@/components/lib/popMessage";
 
 type Tag = {
   id: string;
@@ -74,37 +73,27 @@ export default class Money extends Vue {
   }
   saveRecord() {
     if (!this.record.tags || this.record.tags.length === 0) {
-      return window.alert("请选择至少一个标签");
+      return popMessage("请选择至少一个标签", "error");
     }
     if (this.record.amount === 0) {
-      return window.alert("请填写金额");
+      return popMessage("请输入金额", "warning");
     }
     this.$store.commit("createRecord", this.record);
-    window.alert("已保存");
+    popMessage("已保存");
     this.record.notes = "";
   }
 }
 </script>
-
 <style lang="scss" scoped >
 @import "~@/assets/style/backgroundTitle.scss";
 @import "~@/assets/style/background.scss";
-  .backgroundTitle {
-    width: 100vw;
-    text-align: center;
-    top: 2vh;
-    color: #fff;
-    left: 50vw;
-    transform: translateX(-50%);
-    @media (min-width:500px) {
-    width: auto;
-    }
-  }
 ::v-deep .tabs {
   background-color: transparent;
   color: #fff;
   &-item {
-    height: 44px;
+    font-size: 0.6rem;
+    height: 0.9rem;
+    max-height: 5vh;
     &.selected {
       background-color: #fff;
       &::after {
@@ -113,26 +102,32 @@ export default class Money extends Vue {
     }
   }
 }
-.background {
-  padding-top: 16vh;
-  @media (min-width:500px) {
-    padding-top: 11vh;
-  }
-
-  .content {
-    $bg: #dcf1d6;
-    display: flex;
-    flex-direction: column-reverse;
-    @media (min-width: 500px) {
-      margin: 0 25px;
-      max-width: 450px;
-      max-height: 80vh;
-    }
-    margin: 0 5vw;
-    max-height: 150vw;
-  }
-}
 ::v-deep .tags {
   background-color: #fff;
+  max-height: 30vh;
+}
+::v-deep .notes {
+  max-height: 10vh;
+}
+::v-deep .numberPad {
+  flex-grow: 1;
+  > .output {
+    max-height: 10vh;
+    font-size: 5vh;
+    line-height: 10vh;
+  }
+  > .buttons {
+  }
+}
+::v-deep .layout-content {
+}
+.content {
+  padding-top: $paddingTop;
+  height: 90vh;
+  $bg: #dcf1d6;
+  max-width: 10rem;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
 }
 </style>

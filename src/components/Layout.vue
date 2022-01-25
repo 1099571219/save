@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-wrapper" :class="classPreFix && `${classPreFix}-wrapper`">
+  <div class="wrapper" :class="classPreFix && `${classPreFix}-wrapper`">
     <div class="content" :class="classPreFix && `${classPreFix}-content`">
       <slot />
     </div>
@@ -15,12 +15,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.layout-wrapper {
+@import "~@/assets/style/background.scss";
+
+.wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+
+  > .content {
+  margin: $mainMargin;
+    flex-grow: 1;
+    &::before {
+      content: "";
+      z-index: -1;
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 500px;
+      width: 10rem;
+      padding-top: 5rem;
+      background-color: #55bc7e;
+    }
+  }
+  > Nav {
+  }
 }
-.content {
-  flex-grow: 1;
+.layout-content {
 }
 </style>

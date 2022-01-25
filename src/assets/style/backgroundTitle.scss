@@ -1,9 +1,20 @@
 .backgroundTitle {
+  font-size: .8rem;
   text-align: center;
-  width: 100vw;
   position: fixed;
-  top: 5vh;
+  top: .8rem;
   color: #fff;
-  left: 50vw;
+  left: 50%;
+  width: 10rem;
+  transform: translateX(-50%);
+}
+.mainTitle{
+  font-size: .9rem;
+  text-align: center;
+  position: fixed;
+  top: .4rem;
+  color: #fff;
+  left: 50%;
+  width: 10rem;
   transform: translateX(-50%);
 }

@@ -60,31 +60,27 @@ export default class tags extends Vue {
 @import "~@/assets/style/Input.scss";
 .tags {
   position: relative;
-  flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
-
+  height: 25vh;
   > .scroll {
+    flex-grow: 1;
     overflow: auto;
-    height: 35vw;
-    @media (min-width: 500px) {
-      height: 18vh;
-    }
     > .current {
       display: flex;
-      flex-wrap: wrap-reverse;
+      flex-wrap: wrap;
       flex-direction: row;
       > li {
         $bg: #fdae91;
         background-color: $bg;
         color: #344763;
-        $h: 50px;
+        $h: 0.8rem;
         line-height: $h;
         height: $h;
-        font-size: 18px;;
-        border-radius: 10px;
-        padding: 0px 16px;
-        margin: 12px;
+        font-size: 0.5rem;
+        border-radius: 0.4rem;
+        padding: 0 0.5rem;
+        margin: 0.2rem;
         display: flex;
         &.selected {
           background-color: darken($color: $bg, $amount: 30%);
@@ -94,22 +90,20 @@ export default class tags extends Vue {
     }
   }
   > .new {
-    @media (min-width: 500px) {
-      padding: 1.5vw;
-    }
-    padding: 3vw;
+    padding: 0.2rem;
     display: flex;
     align-items: center;
     justify-content: space-around;
     input {
-      max-width: 70vw;
+      padding: 0.2rem;
+      max-width: 5rem;
     }
     button {
-      font-size: 16px;
       color: #55bc7e;
       background: transparent;
       border: none;
       border-bottom: 1px solid #55bc7e;
+      font-size: 0.4rem;
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <Layout class="wrapper">
+  <Layout classPreFix="layout">
     <div class="background">
       <h1 class="backgroundTitle">自定义标签</h1>
       <div class="tags">
@@ -50,33 +50,30 @@ export default class Labels extends mixins(TagHelper) {
 @import "~@/assets/style/Input.scss";
 @import "~@/assets/style/backgroundTitle.scss";
 @import "~@/assets/style/background.scss";
-
+.background{
+  padding-top: $paddingTop;
+}
 .tags {
   background-color: #fff;
-  font-size: 16px;
+  font-size: 0.6rem;
   color: #666;
-  border-radius: 10px;
+  border-radius: 0.4rem;
   overflow: auto;
   max-height: 60vh;
-  margin: 0 5vw;
-  @media (min-width:500px) {
-    max-width: 450px;
-    margin: 0 25px;
-  }
   ::-webkit-scrollbar {
     width: 0;
   }
   > .tag {
-    min-height: 54px;
+    min-height: 1.4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #c6c6c6;
-    padding: 0 16px;
+    padding: 0 0.32rem;
     svg {
       color: #666;
-      width: 20px;
-      height: 20px;
+      width: 0.4rem;
+      height: 0.4rem;
     }
   }
 }
@@ -85,8 +82,6 @@ export default class Labels extends mixins(TagHelper) {
     text-align: center;
     position: fixed;
     max-width: 500px;
-    margin-bottom: 10px;
-    bottom: 15vw;
     left: 50vw;
     transform: translateX(-50%);
     width: 100%;
@@ -94,14 +89,11 @@ export default class Labels extends mixins(TagHelper) {
       padding: 1vh 0;
       padding-left: 1em;
       margin-right: 10px;
-
       max-width: 50vw;
     }
   }
 }
-@media (min-width: 500px) {
-  .createTag-wrapper {
-    bottom: 10vh;
-  }
+.createTag-wrapper {
+  bottom: 2rem;
 }
 </style>

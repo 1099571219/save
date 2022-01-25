@@ -29,18 +29,16 @@ export default class notes extends Vue {
 
 <style lang="scss" scoped>
 .notes {
-  @media (min-width: 500px) {
-    padding: 1vw;
-  }
   display: flex;
-  padding: 3vw;
+  padding: 0.4rem;
   background-color: #fff;
   align-items: center;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 0.4rem 0.4rem;
   > .name {
     color: #333;
-    font-size: 14px;
-    padding: 0 16px;
+    font-size: 0.4rem;
+    padding: 0 0.4rem;
+
   }
   input {
     flex-grow: 1;

@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <Layout classPreFix="layout">
     <div class="background">
       <h1 class="backgroundTitle">统计</h1>
       <div class="content">
@@ -136,31 +136,32 @@ export default class Statistics extends Vue {
 <style scoped lang="scss">
 @import "~@/assets/style/backgroundTitle.scss";
 @import "~@/assets/style/background.scss";
-.content {
-  margin: 0 5vw;
-  background-color: #f5f6fa;
-  border-radius: 20px;
 
-  @media (min-width: 500px) {
-    max-width: 450px;
-    margin: 0 25px;
-  }
+.content {
+  margin-top: $paddingTop;
+  background-color: #f5f6fa;
+  font-size: 0.4rem;
+  border-radius: 0.4rem;
+  max-width: 10rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 20vh;
+
   .scroll {
     overflow: auto;
-    max-height: 68vh;
-    min-height: 10vh;
-    @media (min-width:500px) {
-    max-height: 68vh;
-    }
+    flex-grow: 1;
+    max-height: 60vh;
   }
 }
 .noResult {
-  padding: 16px;
+  font-size: 0.5rem;
+  padding: 0.2rem;
   text-align: center;
 }
 .tabs {
-  border-radius: 20px 20px 0 0 ;
+  border-radius: 0.4rem 0.4rem 0 0;
   overflow: hidden;
+  font-size: 0.6rem;
 }
 ::v-deep {
   .type-tabs-item {
@@ -172,14 +173,16 @@ export default class Statistics extends Vue {
   }
 }
 %item {
-  padding: 8px 16px;
-  line-height: 24px;
+  padding: 0.3rem 0.4rem;
+  line-height: 3vh;
+  max-height: 6vh;
   display: flex;
   justify-content: space-between;
   align-content: center;
 }
 .title {
   @extend %item;
+  background-color: #f5f6fa;
 }
 .record {
   background: white;
@@ -192,11 +195,13 @@ export default class Statistics extends Vue {
 }
 .notes {
   margin-right: auto;
-  margin-left: 16px;
+  margin-left: 1rem;
   color: #999;
   padding: 0;
 }
 ::v-deep .interval-tabs-item {
-  height: 48px;
+  height: 3rem;
+}
+::v-deep .layout-content {
 }
 </style>

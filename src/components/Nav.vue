@@ -26,24 +26,30 @@ export default Vue.extend({
 <style lang='scss' scoped>
 @import "~@/assets/style/helper.scss";
 nav {
+  max-height: 10vh;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 500px;
+  width: 100%;
   display: flex;
   background-color: #ffffff;
-  border-radius: 20px;
-  margin-top: 10px;
+  border-radius: .5rem;
+  margin-top: 0.625rem;
 
   // @extend %outerShadow;
   > .item {
-    padding: 2px 0;
+    padding: 0.125rem 0;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     justify-content: center;
     align-items: center;
     color: #aeb5c1;
-
     .icon {
-      width: 30px;
-      height: 30px;
+      width: .88rem;
+      height: .88rem;
     }
   }
   > .item.selected {

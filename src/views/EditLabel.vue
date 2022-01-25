@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <Layout classPreFix="layout">
     <div class="navBar">
       <Icon class="leftIcon" name="left" @click="goBack" />
       <span class="title">编辑标签 </span>
@@ -25,6 +25,7 @@ import { Component } from "vue-property-decorator";
 import Notes from "@/components/Money/Notes.vue";
 import Button from "@/components/Button.vue";
 import tagStore from "@/store/tagStore";
+import popMessage from "@/components/lib/popMessage";
 
 @Component({
   components: { Notes, Button },
@@ -35,14 +36,14 @@ export default class EditLabel extends Vue {
   }
   created() {
     const id = this.$route.params.id;
-    console.log(id)
-    this.$store.commit('fetchTag')
+    console.log(id);
+    this.$store.commit("fetchTag");
     this.$store.commit("setCurrentTag", id);
     if (!this.currentTag) {
-      console.log('no tag')
+      console.log("no tag");
       this.$router.replace("/404");
-    }else{
-      console.log('has tag')
+    } else {
+      console.log("has tag");
     }
   }
   update(name: string) {
@@ -51,9 +52,23 @@ export default class EditLabel extends Vue {
     }
   }
   remove() {
-    if (this.currentTag) {
-      this.$store.commit("removeTag", this.currentTag.id);
-    }
+    this.$confirm("是否确认删除该标签?", "删除标签", {
+      confirmButtonText: "确定",
+      cancelButtonText: "取消",
+      type: "warning",
+      center: true,
+      closeOnPressEscape: true,
+    })
+      .then(() => {
+        if (this.currentTag) {
+          this.$store.commit("removeTag", this.currentTag.id);
+          this.$router.go(1);
+          popMessage("删除成功!");
+        }
+      })
+      .catch(() => {
+        popMessage("已取消删除", "info");
+      });
   }
   goBack() {
     this.$router.back();
@@ -62,55 +77,58 @@ export default class EditLabel extends Vue {
 </script>
 
 <style lang="scss" scoped>
+::v-deep .layout-content {
+}
 ::v-deep .notes {
   display: flex;
-  padding: 25px 0;
-  margin: 0 5vw;
+  flex-direction: row;
+  padding: 0.5rem 0;
+  margin: 0 0.3rem;
   background-color: #fff;
   overflow: hidden;
   align-items: center;
   border-radius: 10px;
   > .name {
-    min-width: 90px;
-
     color: #333;
-    font-size: 16px;
-    padding: 0 16px;
+    font-size: 0.6rem;
   }
   input {
-    flex-grow: 1;
     background: transparent;
     border: none;
     color: #666;
+    font-size: 0.5rem;
   }
 }
 .navBar {
   text-align: center;
-  font-size: 20px;
-  padding: 20px 16px;
+  font-size: 0.4rem;
+  padding: 0.4rem 0.32rem;
   background: #55bc7e;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  > .title {
-  }
   > .leftIcon {
-    width: 24px;
-    height: 24px;
+    width: .48rem;
+    height: .48rem;
   }
   > .rightIcon {
-    width: 24px;
-    height: 24px;
+    width: .48rem;
+    height: .48rem;
   }
 }
 .note-wrapper {
   // background: white;
+
   margin-top: 8px;
 }
 .button-wrapper {
   text-align: center;
-  padding: 16px;
-  margin-top: 44-16px;
+  margin-top: 2rem;
+
+  Button {
+    height: 1rem;
+    padding: 0 1rem;
+  }
 }
 </style>
