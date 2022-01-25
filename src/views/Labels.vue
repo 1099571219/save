@@ -1,25 +1,23 @@
 <template>
   <Layout classPreFix="layout">
-    <div class="background">
-      <h1 class="backgroundTitle">自定义标签</h1>
-      <div class="tags">
-        <router-link
-          class="tag"
-          v-for="tag in tags"
-          :key="tag.id"
-          :to="`/labels/edit/${tag.id}`"
-        >
-          <span>{{ tag.name }}</span>
-          <icon name="right" />
-        </router-link>
-      </div>
-      <div class="createTag-wrapper">
-        <input type="text" v-model="newTagName" :placeholder="warn" /><Button
-          @click="create"
-          >新建标签</Button
-        >
-        <!-- <Button @click="createTag">新建标签</Button> -->
-      </div>
+    <h1 class="backgroundTitle">自定义标签</h1>
+    <div class="tags">
+      <router-link
+        class="tag"
+        v-for="tag in tags"
+        :key="tag.id"
+        :to="`/labels/edit/${tag.id}`"
+      >
+        <span>{{ tag.name }}</span>
+        <icon name="right" />
+      </router-link>
+    </div>
+    <div class="createTag-wrapper">
+      <input type="text" v-model="newTagName" :placeholder="warn" /><Button
+        @click="create"
+        >新建标签</Button
+      >
+      <!-- <Button @click="createTag">新建标签</Button> -->
     </div>
   </Layout>
 </template>
@@ -50,9 +48,7 @@ export default class Labels extends mixins(TagHelper) {
 @import "~@/assets/style/Input.scss";
 @import "~@/assets/style/backgroundTitle.scss";
 @import "~@/assets/style/background.scss";
-.background{
-  padding-top: $paddingTop;
-}
+
 .tags {
   background-color: #fff;
   font-size: 0.6rem;
@@ -95,5 +91,8 @@ export default class Labels extends mixins(TagHelper) {
 }
 .createTag-wrapper {
   bottom: 2rem;
+}
+::v-deep .layout-content {
+  padding-top: $paddingTop;
 }
 </style>

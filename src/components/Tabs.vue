@@ -42,11 +42,11 @@ export default class Types extends Vue {
   background-color: #fff;
   color: #344763;
   text-align: center;
-  max-height: 64px;
+  max-height: 1.28rem;
   &-item {
     width: 50%;
     display: flex;
-    height: 64px;
+    height: 1.28rem;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -56,7 +56,7 @@ export default class Types extends Vue {
     }
     &.selected {
       color: #344763;
-      background-color: transparent;
+      background-color: #ffffff;
       &::after {
         content: "";
         position: absolute;

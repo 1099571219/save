@@ -1,6 +1,5 @@
 <template>
   <Layout classPreFix="layout">
-      <div class="content">
         <h1 class="mainTitle">欢迎使用小柴记账</h1>
         <tabs
           class="tabs"
@@ -23,7 +22,6 @@
           @submit="saveRecord"
           class="numberPad"
         />
-    </div>
   </Layout>
 </template>
 
@@ -92,8 +90,7 @@ export default class Money extends Vue {
   color: #fff;
   &-item {
     font-size: 0.6rem;
-    height: 0.9rem;
-    max-height: 5vh;
+    height: 1.5rem;
     &.selected {
       background-color: #fff;
       &::after {
@@ -120,14 +117,10 @@ export default class Money extends Vue {
   }
 }
 ::v-deep .layout-content {
-}
-.content {
-  padding-top: $paddingTop;
-  height: 90vh;
-  $bg: #dcf1d6;
-  max-width: 10rem;
-  max-height: 90vh;
   display: flex;
   flex-direction: column;
+  padding-top: $paddingTop;
+
 }
+
 </style>

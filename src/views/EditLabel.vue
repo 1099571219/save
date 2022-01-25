@@ -24,7 +24,6 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Notes from "@/components/Money/Notes.vue";
 import Button from "@/components/Button.vue";
-import tagStore from "@/store/tagStore";
 import popMessage from "@/components/lib/popMessage";
 
 @Component({
@@ -36,7 +35,6 @@ export default class EditLabel extends Vue {
   }
   created() {
     const id = this.$route.params.id;
-    console.log(id);
     this.$store.commit("fetchTag");
     this.$store.commit("setCurrentTag", id);
     if (!this.currentTag) {
@@ -71,13 +69,18 @@ export default class EditLabel extends Vue {
       });
   }
   goBack() {
-    this.$router.back();
+    const text = this.currentTag.name;
+    if (text !== "") {
+      this.$router.back();
+    }else{
+        popMessage("标签名不能为空", "error");
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-::v-deep .layout-content {
+::v-deep .content {
 }
 ::v-deep .notes {
   display: flex;
@@ -90,7 +93,7 @@ export default class EditLabel extends Vue {
   border-radius: 10px;
   > .name {
     color: #333;
-    font-size: 0.6rem;
+    font-size: 0.5rem;
   }
   input {
     background: transparent;
@@ -109,17 +112,16 @@ export default class EditLabel extends Vue {
   align-items: center;
   justify-content: space-between;
   > .leftIcon {
-    width: .48rem;
-    height: .48rem;
+    width: 0.48rem;
+    height: 0.48rem;
   }
   > .rightIcon {
-    width: .48rem;
-    height: .48rem;
+    width: 0.48rem;
+    height: 0.48rem;
   }
 }
 .note-wrapper {
   // background: white;
-
   margin-top: 8px;
 }
 .button-wrapper {

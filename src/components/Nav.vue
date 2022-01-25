@@ -27,17 +27,11 @@ export default Vue.extend({
 @import "~@/assets/style/helper.scss";
 nav {
   max-height: 10vh;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
   max-width: 500px;
   width: 100%;
   display: flex;
   background-color: #ffffff;
   border-radius: .5rem;
-  margin-top: 0.625rem;
-
   // @extend %outerShadow;
   > .item {
     padding: 0.125rem 0;

@@ -1,33 +1,31 @@
 <template>
   <Layout classPreFix="layout">
-    <div class="background">
+    <!-- <div class="wrapperTool"> -->
       <h1 class="backgroundTitle">统计</h1>
-      <div class="content">
-        <tabs
-          class="tabs"
-          classPrefix="type"
-          :dataSource="typeList"
-          :value.sync="type"
-        />
-        <div class="scroll">
-          <ol v-if="groupedList.length > 0">
-            <li v-for="(group, index) in groupedList" :key="index">
-              <h3 class="title">
-                {{ beautify(group.title) }} <span>￥{{ group.total }}</span>
-              </h3>
-              <ol>
-                <li v-for="item in group.items" :key="item.id" class="record">
-                  <span>{{ tagString(item.tags) }}</span
-                  ><span class="notes">{{ item.notes }}</span
-                  ><span>￥{{ item.amount }}</span>
-                </li>
-              </ol>
-            </li>
-          </ol>
-          <div v-else class="noResult">目前没有记录</div>
-        </div>
+      <tabs
+        class="tabs"
+        classPrefix="type"
+        :dataSource="typeList"
+        :value.sync="type"
+      />
+      <div class="scroll">
+        <ol v-if="groupedList.length > 0">
+          <li v-for="(group, index) in groupedList" :key="index">
+            <h3 class="title">
+              {{ beautify(group.title) }} <span>￥{{ group.total }}</span>
+            </h3>
+            <ol>
+              <li v-for="item in group.items" :key="item.id" class="record">
+                <span>{{ tagString(item.tags) }}</span
+                ><span class="notes">{{ item.notes }}</span
+                ><span>￥{{ item.amount }}</span>
+              </li>
+            </ol>
+          </li>
+        </ol>
+        <div v-else class="noResult">目前没有记录</div>
       </div>
-    </div>
+    <!-- </div> -->
   </Layout>
 </template>
 
@@ -136,32 +134,35 @@ export default class Statistics extends Vue {
 <style scoped lang="scss">
 @import "~@/assets/style/backgroundTitle.scss";
 @import "~@/assets/style/background.scss";
-
-.content {
-  margin-top: $paddingTop;
+.wrapper {
+  padding-top: $paddingTop;
+  
+}
+::v-deep .layout-content {
+  margin-top: 100px;
   background-color: #f5f6fa;
   font-size: 0.4rem;
   border-radius: 0.4rem;
   max-width: 10rem;
+  min-height: 20vh;
   display: flex;
   flex-direction: column;
-  min-height: 20vh;
-
-  .scroll {
-    overflow: auto;
-    flex-grow: 1;
-    max-height: 60vh;
-  }
+}
+.scroll {
+  flex-grow: 1;
+  overflow: auto;
 }
 .noResult {
   font-size: 0.5rem;
   padding: 0.2rem;
   text-align: center;
 }
-.tabs {
+::v-deep .tabs {
   border-radius: 0.4rem 0.4rem 0 0;
-  overflow: hidden;
-  font-size: 0.6rem;
+  &-item {
+    font-size: 0.5rem;
+    height: 1.5rem;
+  }
 }
 ::v-deep {
   .type-tabs-item {
@@ -201,7 +202,5 @@ export default class Statistics extends Vue {
 }
 ::v-deep .interval-tabs-item {
   height: 3rem;
-}
-::v-deep .layout-content {
 }
 </style>

@@ -20,11 +20,8 @@ export default {
 .wrapper {
   display: flex;
   flex-direction: column;
-
-  > .content {
-  margin: $mainMargin;
-    flex-grow: 1;
-    &::before {
+  height: 100vh;
+  &::before {
       content: "";
       z-index: -1;
       position: fixed;
@@ -36,6 +33,11 @@ export default {
       padding-top: 5rem;
       background-color: #55bc7e;
     }
+  > .content {
+    margin: $mainMargin;
+    flex-grow: 1;
+    $bg: #dcf1d6;
+    
   }
   > Nav {
   }
