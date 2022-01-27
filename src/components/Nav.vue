@@ -27,7 +27,6 @@ export default Vue.extend({
 @import "~@/assets/style/helper.scss";
 nav {
   max-height: 10vh;
-  max-width: 500px;
   width: 100%;
   display: flex;
   background-color: #ffffff;

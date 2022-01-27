@@ -28,7 +28,6 @@ export default {
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      max-width: 500px;
       width: 10rem;
       padding-top: 5rem;
       background-color: #55bc7e;
