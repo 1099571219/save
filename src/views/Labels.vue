@@ -50,6 +50,10 @@ export default class Labels extends mixins(TagHelper) {
 @import "~@/assets/style/background.scss";
 
 .tags {
+  @media (min-width: 480px) {
+    max-width: 480px;
+    margin: 0 auto;
+  }
   background-color: #fff;
   font-size: 0.6rem;
   color: #666;

@@ -1,30 +1,30 @@
 <template>
   <Layout classPreFix="layout">
     <!-- <div class="wrapperTool"> -->
-      <h1 class="backgroundTitle">统计</h1>
-      <tabs
-        class="tabs"
-        classPrefix="type"
-        :dataSource="typeList"
-        :value.sync="type"
-      />
-      <div class="scroll">
-        <ol v-if="groupedList.length > 0">
-          <li v-for="(group, index) in groupedList" :key="index">
-            <h3 class="title">
-              {{ beautify(group.title) }} <span>￥{{ group.total }}</span>
-            </h3>
-            <ol>
-              <li v-for="item in group.items" :key="item.id" class="record">
-                <span>{{ tagString(item.tags) }}</span
-                ><span class="notes">{{ item.notes }}</span
-                ><span>￥{{ item.amount }}</span>
-              </li>
-            </ol>
-          </li>
-        </ol>
-        <div v-else class="noResult">目前没有记录</div>
-      </div>
+    <h1 class="backgroundTitle">统计</h1>
+    <tabs
+      class="tabs"
+      classPrefix="type"
+      :dataSource="typeList"
+      :value.sync="type"
+    />
+    <div class="scroll">
+      <ol v-if="groupedList.length > 0">
+        <li v-for="(group, index) in groupedList" :key="index">
+          <h3 class="title">
+            {{ beautify(group.title) }} <span>￥{{ group.total }}</span>
+          </h3>
+          <ol>
+            <li v-for="item in group.items" :key="item.id" class="record">
+              <span>{{ tagString(item.tags) }}</span
+              ><span class="notes">{{ item.notes }}</span
+              ><span>￥{{ item.amount }}</span>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div v-else class="noResult">目前没有记录</div>
+    </div>
     <!-- </div> -->
   </Layout>
 </template>
@@ -136,9 +136,13 @@ export default class Statistics extends Vue {
 @import "~@/assets/style/background.scss";
 .wrapper {
   padding-top: $paddingTop;
-  
+  @media (min-width: 500px) {
+    max-width: 500px;
+    margin: 0 auto;
+  }
 }
 ::v-deep .layout-content {
+  
   margin-top: 100px;
   background-color: #f5f6fa;
   font-size: 0.4rem;

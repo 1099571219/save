@@ -1,27 +1,23 @@
 <template>
   <Layout classPreFix="layout">
-        <h1 class="mainTitle">欢迎使用小柴记账</h1>
-        <tabs
-          class="tabs"
-          :dataSource="recordTypeList"
-          :value.sync="record.type"
-        />
-        <!-- 只要是传一个东西进去，然后要更新它就使用.sync 在内部使用$emit('update:value',更新后的参数) -->
+    <h1 class="mainTitle">欢迎使用小柴记账</h1>
+    <tabs class="tabs" :dataSource="recordTypeList" :value.sync="record.type" />
+    <!-- 只要是传一个东西进去，然后要更新它就使用.sync 在内部使用$emit('update:value',更新后的参数) -->
 
-        <Tags @update:value="record.tags = $event" class="tags" />
-        <div class="notes">
-          <notes
-            fieldName="备注"
-            placeholder="在这里输入备注"
-            @update:value="onUpdateNotes"
-            :value.sync="record.notes"
-          />
-        </div>
-        <number-pad
-          :value.sync="record.amount"
-          @submit="saveRecord"
-          class="numberPad"
-        />
+    <Tags @update:value="record.tags = $event" class="tags" />
+    <div class="notes">
+      <notes
+        fieldName="备注"
+        placeholder="在这里输入备注"
+        @update:value="onUpdateNotes"
+        :value.sync="record.notes"
+      />
+    </div>
+    <number-pad
+      :value.sync="record.amount"
+      @submit="saveRecord"
+      class="numberPad"
+    />
   </Layout>
 </template>
 
@@ -86,6 +82,11 @@ export default class Money extends Vue {
 @import "~@/assets/style/backgroundTitle.scss";
 @import "~@/assets/style/background.scss";
 ::v-deep .tabs {
+  @media (min-width: 480px) {
+    width: 480px;
+    margin-left:auto;
+    margin-right: auto;
+  }
   background-color: transparent;
   color: #fff;
   &-item {
@@ -100,13 +101,27 @@ export default class Money extends Vue {
   }
 }
 ::v-deep .tags {
+  @media (min-width: 480px) {
+    width: 480px;
+    margin: 0 auto;
+  }
   background-color: #fff;
   max-height: 30vh;
 }
 ::v-deep .notes {
+  @media (min-width: 480px) {
+    width: 480px;
+    margin-left:auto;
+    margin-right: auto;
+  }
   max-height: 10vh;
 }
 ::v-deep .numberPad {
+  @media (min-width: 480px) {
+    width: 480px;
+    margin-left:auto;
+    margin-right: auto;
+  }
   flex-grow: 1;
   > .output {
     max-height: 10vh;
@@ -120,7 +135,5 @@ export default class Money extends Vue {
   display: flex;
   flex-direction: column;
   padding-top: $paddingTop;
-
 }
-
 </style>
