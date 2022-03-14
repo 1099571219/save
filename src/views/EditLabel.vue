@@ -83,14 +83,10 @@ export default class EditLabel extends Vue {
 ::v-deep .content {
 }
 ::v-deep .notes {
-   @media (min-width: 480px) {
-    max-width: 480px;
-    margin: 0 auto;
-  }
+  width:100%;
   display: flex;
   flex-direction: row;
   padding: 0.5rem 0;
-  margin: 0 0.3rem;
   background-color: #fff;
   overflow: hidden;
   align-items: center;
@@ -107,10 +103,7 @@ export default class EditLabel extends Vue {
   }
 }
 .navBar {
-   @media (min-width: 480px) {
-    max-width: 480px;
-    margin: 0 auto;
-  }
+  width: 100%;
   text-align: center;
   font-size: 0.4rem;
   padding: 0.4rem 0.32rem;

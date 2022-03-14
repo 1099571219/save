@@ -26,7 +26,6 @@ export default Vue.extend({
 <style lang='scss' scoped>
 @import "~@/assets/style/helper.scss";
 nav {
-  max-width: 500px;
   margin:0 auto;
   max-height: 10vh;
   width: 100%;

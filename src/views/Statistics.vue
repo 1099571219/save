@@ -136,23 +136,19 @@ export default class Statistics extends Vue {
 @import "~@/assets/style/background.scss";
 .wrapper {
   padding-top: $paddingTop;
-  @media (min-width: 500px) {
-    max-width: 500px;
-    margin: 0 auto;
-  }
 }
 ::v-deep .layout-content {
-  
+
   margin-top: 100px;
   background-color: #f5f6fa;
   font-size: 0.4rem;
   border-radius: 0.4rem;
-  max-width: 10rem;
   min-height: 20vh;
   display: flex;
   flex-direction: column;
 }
 .scroll {
+
   flex-grow: 1;
   overflow: auto;
 }

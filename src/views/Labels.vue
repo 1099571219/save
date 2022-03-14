@@ -50,10 +50,7 @@ export default class Labels extends mixins(TagHelper) {
 @import "~@/assets/style/background.scss";
 
 .tags {
-  @media (min-width: 480px) {
-    max-width: 480px;
-    margin: 0 auto;
-  }
+  width: 100%;
   background-color: #fff;
   font-size: 0.6rem;
   color: #666;
@@ -81,7 +78,7 @@ export default class Labels extends mixins(TagHelper) {
   &-wrapper {
     text-align: center;
     position: fixed;
-    max-width: 500px;
+    max-width: 100%;
     left: 50vw;
     transform: translateX(-50%);
     width: 100%;
@@ -89,7 +86,7 @@ export default class Labels extends mixins(TagHelper) {
       padding: 1vh 0;
       padding-left: 1em;
       margin-right: 10px;
-      max-width: 50vw;
+      max-width: 70%;
     }
   }
 }

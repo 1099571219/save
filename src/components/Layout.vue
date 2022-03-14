@@ -26,9 +26,7 @@ export default {
       z-index: -1;
       position: fixed;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 10rem;
+      width: 100%;
       padding-top: 5rem;
       background-color: #55bc7e;
     }

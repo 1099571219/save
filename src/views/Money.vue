@@ -82,11 +82,7 @@ export default class Money extends Vue {
 @import "~@/assets/style/backgroundTitle.scss";
 @import "~@/assets/style/background.scss";
 ::v-deep .tabs {
-  @media (min-width: 480px) {
-    width: 480px;
-    margin-left:auto;
-    margin-right: auto;
-  }
+  width: 100%;
   background-color: transparent;
   color: #fff;
   &-item {
@@ -101,27 +97,16 @@ export default class Money extends Vue {
   }
 }
 ::v-deep .tags {
-  @media (min-width: 480px) {
-    width: 480px;
-    margin: 0 auto;
-  }
+    width: 100%;
   background-color: #fff;
   max-height: 30vh;
 }
 ::v-deep .notes {
-  @media (min-width: 480px) {
-    width: 480px;
-    margin-left:auto;
-    margin-right: auto;
-  }
+    width: 100%;
   max-height: 10vh;
 }
 ::v-deep .numberPad {
-  @media (min-width: 480px) {
-    width: 480px;
-    margin-left:auto;
-    margin-right: auto;
-  }
+    width: 100%;
   flex-grow: 1;
   > .output {
     max-height: 10vh;
